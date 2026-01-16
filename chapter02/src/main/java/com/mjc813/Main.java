@@ -21,5 +21,9 @@ public class Main {
         cast.promotionExample();
         cast.castingExample();
         cast.operationPromotionExample();
+
+        TranslateType translate = new TranslateType();
+        translate.useTranslate();
+        translate.useConversion();
     }
 }
