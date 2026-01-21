@@ -398,15 +398,51 @@ public class Chapter5 {
         System.out.println("과제 1번 --------------------");
         boolean[] boolArray = new boolean[10];
         for (int i = 0; i < boolArray.length; i++) {
-            boolArray[i] = (i % 2 == 0) ? true : false;
-            System.out.print(boolArray[i] + " ");
+            boolArray[i] = i % 2 == 0;
+            System.out.print((i != boolArray.length - 1) ? boolArray[i] + ", " : boolArray[i]);
+        }
+
+        System.out.println("\n과제 1-1번 --------------------");
+        int[] intArray = new int[30];
+        for (int i = 0; i < intArray.length; i++) {
+            intArray[i] = i;
+            System.out.print((i != intArray.length - 1) ? intArray[i] + ", " : intArray[i]);
+        }
+
+        System.out.println("\n과제 1-2번 --------------------");
+        char[] charArray = new char[20];
+        for (char ch : charArray) {
+            System.out.print(ch + " ");
+        }
+
+        System.out.println("\n과제 1-3번 --------------------");
+        boolean[][] multiBooleanArray = new boolean[3][4];
+        for (int i = 0; i < multiBooleanArray.length; i++) {
+            for (int j = 0; j < multiBooleanArray[i].length; j++) {
+                multiBooleanArray[i][j] = true;
+                System.out.print(multiBooleanArray[i][j] + " ");
+            }
+        }
+
+        System.out.println("\n과제 1-4번 --------------------");
+        String[] stringArray = new String[50];
+        for (int i = 0; i < stringArray.length; i++) {
+            stringArray[i] = "empty";
+            System.out.print(stringArray[i] + " ");
         }
 
         System.out.println("\n\n과제 2번 --------------------");
+//        int[][] intDemention2 = {
+//                {0, 0, 1, 1, 0, 0}, {1, 0, 0, 1, 0, 0}
+//                , {0, 1, 0, 1, 0, 0}, {0, 0, 1, 1, 0, 1}
+//                , {1, 0, 0, 0, 1, 0}
+//        };
         int[][] intDemention2 = {
-                {0, 0, 1, 1, 0, 0}, {1, 0, 0, 1, 0, 0}
-                , {0, 1, 0, 1, 0, 0}, {0, 0, 1, 1, 0, 1}
-                , {1, 0, 0, 0, 1, 0}
+                {1, 0, 1, 0, 0, 1}
+                , {1, 0, 1, 1, 0, 1}
+                , {0, 1, 0, 1, 0, 0}
+                , {1, 0, 0, 1, 0, 1}
+                , {1, 0, 1, 0, 0, 1}
         };
 
         int[] sumArray = new int[2];
@@ -424,10 +460,18 @@ public class Chapter5 {
 
 
         System.out.println("\n과제 3번 --------------------");
+//        char[][] chInput = {
+//                {'*', '*', '*', '*', ' '},
+//                {'*', '*', ' ', ' ', ' '},
+//                {'*', ' ', '*', '*', '*'}
+//        };
         char[][] chInput = {
-                {'*', '*', '*', '*', ' '},
-                {'*', '*', ' ', ' ', ' '},
-                {'*', ' ', '*', '*', '*'}
+                {'*', ' ', '*', '*', ' '}
+                , {'*', '*', ' ', ' ', ' '}
+                , {'*', ' ', '*', ' ', '*'}
+                , {' ', '*', '*', ' ', '*'}
+                , {'*', ' ', '*', ' ', '*'}
+                , {' ', ' ', '*', '*', '*'}
         };
 
         System.out.println("입력 값 : ");
@@ -440,7 +484,7 @@ public class Chapter5 {
             System.out.println();
         }
 
-        char[][] chOutput = new char[sum/3][3];
+        char[][] chOutput = new char[sum/chInput.length][chInput.length];
         for (int i = 0; i < chInput.length; i++) {
             for (int j = 0; j < chInput[i].length; j++) {
                 chOutput[j][i] = chInput[i][j];
