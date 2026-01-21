@@ -593,9 +593,9 @@ public class Chapter5 {
         star++; num -= 2;
         int nowIndex = index;
 
-        // 별 갯수 감소
         System.out.println();
 
+        // 별 갯수 감소
         for (int i = ++index; i < nowIndex+chDiamond.length/2+1; i++) {
             for (int j = 0; j < star; j++) {
                 chDiamond[i][j] = ' ';
