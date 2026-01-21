@@ -393,4 +393,66 @@ public class Chapter5 {
 
         return count;
     }
+
+    public void arrayProblem() {
+        System.out.println("과제 1번 --------------------");
+        boolean[] boolArray = new boolean[10];
+        for (int i = 0; i < boolArray.length; i++) {
+            boolArray[i] = (i % 2 == 0) ? true : false;
+            System.out.print(boolArray[i] + " ");
+        }
+
+        System.out.println("\n\n과제 2번 --------------------");
+        int[][] intDemention2 = {
+                {0, 0, 1, 1, 0, 0}, {1, 0, 0, 1, 0, 0}
+                , {0, 1, 0, 1, 0, 0}, {0, 0, 1, 1, 0, 1}
+                , {1, 0, 0, 0, 1, 0}
+        };
+
+        int[] sumArray = new int[2];
+
+        for (int i = 0; i < intDemention2.length; i++) {
+            for (int j = 0; j < intDemention2[i].length; j++) {
+                if (intDemention2[i][j] == 0) {
+                    sumArray[0]++;
+                } else if (intDemention2[i][j] == 1) {
+                    sumArray[1]++;
+                }
+            }
+        }
+        System.out.println("0의 갯수: " + sumArray[0] + ", 1의 갯수: " + sumArray[1]);
+
+
+        System.out.println("\n과제 3번 --------------------");
+        char[][] chInput = {
+                {'*', '*', '*', '*', ' '},
+                {'*', '*', ' ', ' ', ' '},
+                {'*', ' ', '*', '*', '*'}
+        };
+
+        System.out.println("입력 값 : ");
+        int sum = 0;
+        for (int i = 0; i < chInput.length; i++) {
+            for (int j = 0; j < chInput[i].length; j++) {
+                System.out.print(chInput[i][j]);
+                sum++;
+            }
+            System.out.println();
+        }
+
+        char[][] chOutput = new char[sum/3][3];
+        for (int i = 0; i < chInput.length; i++) {
+            for (int j = 0; j < chInput[i].length; j++) {
+                chOutput[j][i] = chInput[i][j];
+            }
+        }
+
+        System.out.println("출력 값 : ");
+        for (int i = 0; i < chOutput.length; i++) {
+            for (int j = 0; j < chOutput[i].length; j++) {
+                System.out.print(chOutput[i][j]);
+            }
+            System.out.println();
+        }
+    }
 }

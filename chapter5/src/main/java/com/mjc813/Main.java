@@ -6,6 +6,7 @@ public class Main {
 //        chap5.exam();
 //        chap5.stringExam();
 //        chap5.multiDimensionalArrayByNewExam();
-        chap5.acmicpcNet_problem_10818();
+//        chap5.acmicpcNet_problem_10818();
+        chap5.arrayProblem();
     }
 }
