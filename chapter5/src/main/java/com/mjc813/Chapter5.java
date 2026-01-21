@@ -519,7 +519,6 @@ public class Chapter5 {
         String[] strArray = new String[25];
         for (int i = 0; i < strArray.length; i++) {
             strArray[i] = dArray[i] + " => " + nArray[i];
-
             System.out.print((i != strArray.length-1) ? strArray[i] + ", " : strArray[i]);
         }
 
@@ -615,5 +614,7 @@ public class Chapter5 {
             num -= 2;
             System.out.println();
         }
+
+         s.close();
     }
 }
