@@ -563,6 +563,7 @@ public class Chapter5 {
         char[][] chDiamond = new char[count][count];
 
         // 변수 초기화
+        // star : 출력할 별의 위치, num : 출력할 별의 갯수, index : 현재 행
         int star = chDiamond.length/2, num = 1, index = 0;
 
         // 별 갯수 증가
