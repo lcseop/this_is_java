@@ -1,5 +1,8 @@
 package com.mjc813;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Chapter5 {
     public void exam() {
         // ------------------- 5-3 예제
@@ -324,9 +327,70 @@ public class Chapter5 {
         System.out.println("전체 학생의 영어 평균 점수: " + totalEnglishAvg);
     }
 
+    public void arrayTest() {
+        char[][] lines = new char[5][];
+        for (int i = 0; i < lines.length; i++) {
+            lines[i] = new char[i+1];
+            for (int j = 0; j < lines[i].length; j++) {
+                lines[i][j] = '*';
+            }
+        }
+
+        for (int i = 0; i < lines.length; i++) {
+            for (int j = 0; j < lines[i].length; j++) {
+                System.out.printf("%c", lines[i][j]);
+            }
+            System.out.println();
+        }
+
+
+    }
+
+    private int[] findMinMax(int[] array) {
+        int[] result = { Integer.MAX_VALUE, Integer.MIN_VALUE };
+        for (int num : array) {
+            result[0] = (result[0] > num) ? num : result[0];
+            result[1] = (result[1] < num) ? num : result[1];
+        }
+        return result;
+    }
+
+    public void acmicpcNet_problem_10818() {
+        Scanner scanner = new Scanner(System.in);
+        int count = inputInteger(scanner);
+        if (count <= 0) {
+            return;
+        }
+
+        int[] intArray = new int[count];
+        for (int i = 0; i < intArray.length; i++) {
+            intArray[i] = scanner.nextInt();
+        }
+
+        int[] resArray = findMinMax(intArray);
+        System.out.println("acmicpcNet_problem_10818 = " + resArray[0] + ", " + resArray[1]);
+
+    }
+
     public static void printItem(int[] scores) {
         for (int i = 0; i < 3; i++) {
             System.out.println("score[" + i + "]: " + scores[i]);
         }
+    }
+
+    private int inputInteger(Scanner s) {
+        int count = 0;
+        try {
+            count = s.nextInt();
+        } catch (InputMismatchException i) {
+            System.err.println("올바른 정수 값을 입력하세요.");
+            count = -1;
+        }
+        catch (Exception e) {
+            System.err.println("Error : " + e);
+            count = -1;
+        }
+
+        return count;
     }
 }
