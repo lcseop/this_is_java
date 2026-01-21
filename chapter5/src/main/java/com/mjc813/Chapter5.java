@@ -499,4 +499,121 @@ public class Chapter5 {
             System.out.println();
         }
     }
+
+    public void arrayProblem2() {
+        System.out.println("1-1 -----------------");
+        double[] dArray = new double[25];
+        for (int i = 0; i < dArray.length; i++) {
+            dArray[i] = Math.random()*100;
+            System.out.print((i != dArray.length-1) ? dArray[i] + ", " : dArray[i]);
+        }
+
+        System.out.println("\n1-2 -----------------");
+        int[] nArray = new int[25];
+        for (int i = 0; i < nArray.length; i++) {
+            nArray[i] = (int) dArray[i];
+            System.out.print((i != nArray.length-1) ? nArray[i] + ", " : nArray[i]);
+        }
+
+        System.out.println("\n1-3 -----------------");
+        String[] strArray = new String[25];
+        for (int i = 0; i < strArray.length; i++) {
+            strArray[i] = dArray[i] + " => " + nArray[i];
+
+            System.out.print((i != strArray.length-1) ? strArray[i] + ", " : strArray[i]);
+        }
+
+        System.out.println("\n2-1 -----------------");
+        System.out.print("enter: ");
+        Scanner s = new Scanner(System.in);
+        int count = s.nextInt();
+        int[][] nArray2 = new int[count][count];
+        for (int i = 0; i < nArray2.length; i++) {
+            for (int j = 0; j < nArray2[i].length; j++) {
+                nArray2[i][j] = i+j+1;
+                System.out.print(nArray2[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("2-2 -----------------");
+        System.out.print("enter: ");
+        count = s.nextInt();
+        char[][] square = new char[count][count];
+        for (int i = 0; i < count; i++) {
+            for (int j = 0; j < count; j++) {
+                if (i == 0) {
+                    square[i][j] = (j == 0) ? '┌' : (j == count-1) ? '┐' : '─';
+                } else if (i == count-1) {
+                    square[i][j] = (j == 0) ? '└' : (j == count-1) ? '┘' : '─';
+                } else {
+                    square[i][j] = (j == 0 || j == count-1) ? '│' : ' ';
+                }
+                System.out.print(square[i][j]);
+            }
+            System.out.println();
+        }
+
+        System.out.println("\n2-3 -----------------");
+        System.out.print("enter: ");
+        count = s.nextInt();
+        if (count % 2 == 0) {
+            System.out.println("홀수로 입력하세요.");
+            return;
+        }
+        char[][] chDiamond = new char[count][count];
+
+        // 변수 초기화
+        int star = chDiamond.length/2, num = 1, index = 0;
+
+        // 별 갯수 증가
+        for (int i = 0; i < chDiamond.length/2; i++) {
+            for (int j = 0; j < star; j++) {
+                chDiamond[i][j] = ' ';
+                System.out.print(chDiamond[i][j]);
+            }
+            for (int st = star; st < star + num; st++) {
+                chDiamond[i][st] = '*';
+                System.out.print(chDiamond[i][st]);
+            }
+            for (int j = chDiamond.length - (star + num); j < chDiamond.length; j++) {
+                chDiamond[i][j] = ' ';
+                System.out.print(chDiamond[i][j]);
+            }
+            star--;
+            index++;
+            num += 2;
+            System.out.println();
+        }
+
+        // 별 갯수 최대
+        for (int i = 0; i < num; i++) {
+            chDiamond[index][i] = '*';
+            System.out.print(chDiamond[index][i]);
+        }
+        star++; num -= 2;
+        int nowIndex = index;
+
+        // 별 갯수 감소
+        System.out.println();
+
+        for (int i = ++index; i < nowIndex+chDiamond.length/2+1; i++) {
+            for (int j = 0; j < star; j++) {
+                chDiamond[i][j] = ' ';
+                System.out.print(chDiamond[i][j]);
+            }
+            for (int st = star; st < star + num; st++) {
+                chDiamond[i][st] = '*';
+                System.out.print(chDiamond[i][st]);
+            }
+            for (int j = chDiamond.length - (star + num); j < chDiamond.length; j++) {
+                chDiamond[i][j] = ' ';
+                System.out.print(chDiamond[i][j]);
+            }
+            star++;
+            index++;
+            num -= 2;
+            System.out.println();
+        }
+    }
 }
