@@ -1,5 +1,6 @@
 package com.mjc813;
 
+import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -617,5 +618,162 @@ public class Chapter5 {
         }
 
          s.close();
+    }
+
+    public void testEnum() {
+        Genre gen = Genre.ACTION;
+        Genre[] genres = new Genre[3];
+
+        for (Genre g : genres) {
+            System.out.println(g);
+        }
+    }
+
+    public void arrayExam3() {
+        // 객체를 참조하는 배열
+        String[] strArray = new String[3];
+        strArray[0] = "Java";
+        strArray[1] = "Java";
+        strArray[2] = new String("Java");
+
+        System.out.println(strArray[0] == strArray[1]);
+        System.out.println(strArray[0] == strArray[2]);
+        System.out.println(strArray[0].equals(strArray[2]));
+
+        // 배열 복사
+        int[] oldIntArray = { 1, 2, 3 };
+        int[] newIntArray = new int[5];
+
+        for (int i = 0; i < oldIntArray.length; i++) {
+            newIntArray[i] = oldIntArray[i];
+        }
+
+        for (int i = 0; i < newIntArray.length; i++) {
+            System.out.print(newIntArray[i] + ", ");
+        }
+        System.out.println();
+
+        // 배열 복사 (arraycopy())
+        String[] oldStrArray = { "java", "array", "copy" };
+        String[] newStrArray = new String[5];
+
+        System.arraycopy(oldStrArray, 0, newStrArray, 0, oldStrArray.length);
+
+        for (int i = 0; i < newStrArray.length; i++) {
+            System.out.print(newStrArray[i] + ", ");
+        }
+        System.out.println();
+
+        // 향상된 for 문
+        int[] scores = { 95, 71, 84, 93, 87 };
+        int sum = 0;
+        for (int score: scores) {
+            sum = sum + score;
+        }
+        System.out.println("점수 총합 = " + sum);
+        double avg = (double) sum / scores.length;
+        System.out.println("점수 평균 = " + avg);
+
+        // Enum
+        Week today = null;
+
+        Calendar cal = Calendar.getInstance();
+
+        int week = cal.get(Calendar.DAY_OF_WEEK);
+
+        switch(week) {
+            case 1 : today = Week.SUNDAY; break;
+            case 2 : today = Week.MONDAY; break;
+            case 3 : today = Week.THUSDAY; break;
+            case 4 : today = Week.WEDENSDAY; break;
+            case 5 : today = Week.THURSDAY; break;
+            case 6 : today = Week.FRIDAY; break;
+            case 7 : today = Week.SATURDAY; break;
+        }
+
+        if (today == Week.SUNDAY) {
+            System.out.println("일요일에는 축구를 합니다.");
+        } else {
+            System.out.println(today + "에는 열심히 자바를 공부합니다.");
+        }
+    }
+
+    public void praticeCheck() {
+        int[] array = {1, 5, 3, 8, 2};
+        int max = Integer.MIN_VALUE;
+        for (int num : array) {
+            max = (num > max) ? num : max;
+        }
+        System.out.println(max);
+
+
+        int[][] array2 = {
+                {95, 86},
+                {83, 92, 96},
+                {78, 83, 93, 87, 88}
+        };
+
+        int arrayList[] = new int[3];
+        for (int i = 0; i < array2.length; i++) {
+            for (int j = 0; j < array2[i].length; j++) {
+                arrayList[0] += array2[i][j];
+                arrayList[2]++;
+            }
+        }
+        arrayList[1] = arrayList[0] / arrayList[2];
+        System.out.println("합계는 " + arrayList[0] + ", 평균은 " + arrayList[1]);
+
+        Scanner s = new Scanner(System.in);
+        int[] scoreList = new int[0];
+        loop: while (true) {
+            System.out.println("------------------------------------------------------");
+            System.out.println("1. 학생수 | 2. 점수입력 | 3. 점수리스트 | 4. 분석 | 5. 종료");
+            System.out.println("------------------------------------------------------");
+            System.out.print("선택> ");
+
+            switch (Integer.parseInt(s.nextLine())) {
+                case 1 :
+                    System.out.print("학생수> ");
+                    scoreList = new int[Integer.parseInt(s.nextLine())];
+                    break;
+                case 2 :
+                    for (int i = 0; i < scoreList.length; i++) {
+                        do {
+                            System.out.print("scores[" + i + "]> ");
+                            scoreList[i] = Integer.parseInt(s.nextLine());
+                            if (scoreList[i] >= 0 && scoreList[i] <= 100) {
+                                break;
+                            }
+                            System.out.println("0~100점 사이의 정수만 입력");
+                        } while(true);
+                    }
+                    break;
+                case 3 :
+                    for (int i = 0; i < scoreList.length; i++) {
+                        System.out.print("scores[" + i + "]: " + scoreList[i] + "\n");
+                    }
+                    break;
+                case 4 :
+                    int maxScore = Integer.MIN_VALUE, sumScore = 0;
+                    double avgScore = 0;
+                    for (int i = 0; i < scoreList.length; i++) {
+                        maxScore = (scoreList[i] > maxScore) ? scoreList[i] : maxScore;
+                        sumScore += scoreList[i];
+                    }
+                    avgScore = (double) (sumScore / scoreList.length);
+                    System.out.println("최고 점수: " + maxScore);
+                    System.out.println("평균 점수: " + avgScore);
+                    break;
+                case 5 :
+                    System.out.println("프로그램 종료");
+                    break loop;
+            }
+        }
+    }
+
+    public void arrayAddExam() {
+        // 1-1
+        String[] mon = new String[12];
+        mon = new String[] { "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" };
     }
 }
