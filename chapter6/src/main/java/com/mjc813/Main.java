@@ -64,7 +64,7 @@ public class Main {
         account.setBalance(300000);
         System.out.println("현재 잔고: " + account.getBalance());
 
-        BankApplication bank = new BankApplication(account);
+        BankApplication bank = new BankApplication();
         bank.start();
 
 

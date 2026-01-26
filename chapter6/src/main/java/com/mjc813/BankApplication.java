@@ -5,12 +5,7 @@ import java.util.Scanner;
 
 @Getter
 public class BankApplication {
-    private Account[] accounts = new Account[100];
-    private Account myAccount;
-
-    public BankApplication(Account account) {
-        this.myAccount = account;
-    }
+    private final Account[] accounts = new Account[100];
 
     public void start() {
         Scanner s = new Scanner(System.in);
@@ -72,14 +67,13 @@ public class BankApplication {
                     try {
                         System.out.print("계좌번호: ");
                         targetNumber = s.nextLine();
-                        targetFind:
-                        while (true) {
+                        targetFind: while (true) {
                             if (targetNumber.equals("0")) {
                                 System.out.println("예금을 중단합니다.");
                                 break select;
                             }
                             for (int i = 0; i < accounts.length; i++) {
-                                if (accounts[i].getNumber().equals(targetNumber)) {
+                                if (accounts[i] != null && accounts[i].getNumber().equals(targetNumber)) {
                                     targetAccount = accounts[i];
                                     break targetFind;
                                 }
@@ -120,7 +114,7 @@ public class BankApplication {
                                 break select;
                             }
                             for (int i = 0; i < accounts.length; i++) {
-                                if (accounts[i].getNumber().equals(targetNum)) {
+                                if (accounts[i] != null && accounts[i].getNumber().equals(targetNum)) {
                                     targetAcc = accounts[i];
                                     break targetFind;
                                 }
