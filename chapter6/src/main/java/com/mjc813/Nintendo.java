@@ -1,5 +1,8 @@
 package com.mjc813;
 
+import lombok.Getter;
+
+@Getter
 public class Nintendo {
     private String title;
     private String genre;
@@ -29,25 +32,5 @@ public class Nintendo {
         this.grade = grade;
         this.price = price;
         this.imgUrl = imgUrl;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
     }
 }
