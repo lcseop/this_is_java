@@ -1,7 +1,11 @@
 package com.mjc813;
 
+import lombok.*;
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@ToString
 public class GameCharacter {
     private String name;
     private Cls cls;
@@ -60,45 +64,5 @@ public class GameCharacter {
         if (stat_mp < 0) {
             this.stat_mp = 0;
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Cls getCls() {
-        return cls;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public int getStat_hp() {
-        return stat_hp;
-    }
-
-    public int getStat_mp() {
-        return stat_mp;
-    }
-
-    public int getStat_str() {
-        return stat_str;
-    }
-
-    public int getStat_int() {
-        return stat_int;
-    }
-
-    public int getStat_dex() {
-        return stat_dex;
-    }
-
-    public int getStat_lux() {
-        return stat_lux;
     }
 }
