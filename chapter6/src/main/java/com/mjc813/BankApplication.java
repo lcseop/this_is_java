@@ -1,9 +1,7 @@
 package com.mjc813;
 
-import lombok.Getter;
 import java.util.Scanner;
 
-@Getter
 public class BankApplication {
     private final Account[] accounts = new Account[100];
 
