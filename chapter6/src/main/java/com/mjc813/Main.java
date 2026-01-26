@@ -1,6 +1,7 @@
 package com.mjc813;
 
 public class Main {
+
 //    int speed;
 //
 //    void run() {
@@ -15,53 +16,107 @@ public class Main {
 
     public static void main(String[] args) {
 
-        double result1 = 10 * 10 * Calculator.pi;
-        int result2 = Calculator.plus(10, 5);
-        int result3 = Calculator.minus(10, 5);
-        System.out.println("result1: " + result1);
-        System.out.println("result2: " + result2);
-        System.out.println("result3: " + result3);
+        // --------------------------------확인문제-----------------------------------
 
-        System.out.println(Television.info);
+        Member member = new Member("홍길동", "1234");
+        System.out.println(member.toString());
 
-//        simulate();
-//
-//        Main myCar = new Main();
-//        myCar.speed = 60;
-//        myCar.run();
-
-        Korean2 k1 = new Korean2("123456-1234567", "김자바");
-
-        System.out.println(k1.nation);
-        System.out.println(k1.ssn);
-        System.out.println(k1.name);
-
-        k1.name = "김자바";
-
-        System.out.println("지구의 반지름 : " + Earth.EARTH_RADIUS + "km");
-        System.out.println("지구의 표면적 : " + Earth.EARTH_SURFACE_AREA + "km^2");
-
-        Car myCar_1 = new Car();
-
-        myCar_1.setSpeed(-50);
-        System.out.println("현재 속도: " + myCar_1.getSpeed());
-
-        myCar_1.setSpeed(60);
-        System.out.println("현재 속도: " + myCar_1.getSpeed());
-
-        if (!myCar_1.isStop()) {
-            myCar_1.setStop(true);
+        MemberService memberService = new MemberService();
+        boolean result = memberService.login("hong", "12345");
+        if (result) {
+            System.out.println("로그인 되었습니다.");
+            memberService.logout("hong");
+        } else {
+            System.out.println("id 또는 password가 올바르지 않습니다.");
         }
-        System.out.println("현재 속도: " + myCar_1.getSpeed());
 
-        Singleton obj1 = Singleton.getInstance();
-        Singleton obj2 = Singleton.getInstance();
+//        Printer printer = new Printer();
+//        printer.println(10);
+//        printer.println(true);
+//        printer.println(5.7);
+//        printer.println("홍길동");
+
+        Printer.println(10);
+        Printer.println(true);
+        Printer.println(5.7);
+        Printer.println("홍길동");
+
+        ShopService obj1 = ShopService.getInstance();
+        ShopService obj2 = ShopService.getInstance();
 
         if (obj1 == obj2) {
-            System.out.println("같은 Singleton 객체입니다.");
+            System.out.println("같은 ShopService 객체입니다.");
         } else {
-            System.out.println("다른 Singleton 객체입니다.");
+            System.out.println("다른 ShopService 객체입니다.");
         }
+
+        Account account = new Account();
+
+        account.setBalance(10000);
+        System.out.println("현재 잔고: " + account.getBalance());
+
+        account.setBalance(-100);
+        System.out.println("현재 잔고: " + account.getBalance());
+
+        account.setBalance(2000000);
+        System.out.println("현재 잔고: " + account.getBalance());
+
+        account.setBalance(300000);
+        System.out.println("현재 잔고: " + account.getBalance());
+
+        BankApplication bank = new BankApplication(account);
+        bank.start();
+
+
+        // --------------------------------------------------------------------------
+
+//        double result1 = 10 * 10 * Calculator.pi;
+//        int result2 = Calculator.plus(10, 5);
+//        int result3 = Calculator.minus(10, 5);
+//        System.out.println("result1: " + result1);
+//        System.out.println("result2: " + result2);
+//        System.out.println("result3: " + result3);
+//
+//        System.out.println(Television.info);
+//
+////        simulate();
+////
+////        Main myCar = new Main();
+////        myCar.speed = 60;
+////        myCar.run();
+//
+//        Korean2 k1 = new Korean2("123456-1234567", "김자바");
+//
+//        System.out.println(k1.nation);
+//        System.out.println(k1.ssn);
+//        System.out.println(k1.name);
+//
+//        k1.name = "김자바";
+//
+//        System.out.println("지구의 반지름 : " + Earth.EARTH_RADIUS + "km");
+//        System.out.println("지구의 표면적 : " + Earth.EARTH_SURFACE_AREA + "km^2");
+//
+//        Car myCar_1 = new Car();
+//
+//        myCar_1.setSpeed(-50);
+//        System.out.println("현재 속도: " + myCar_1.getSpeed());
+//
+//        myCar_1.setSpeed(60);
+//        System.out.println("현재 속도: " + myCar_1.getSpeed());
+//
+//        if (!myCar_1.isStop()) {
+//            myCar_1.setStop(true);
+//        }
+//        System.out.println("현재 속도: " + myCar_1.getSpeed());
+//
+//        Singleton obj1 = Singleton.getInstance();
+//        Singleton obj2 = Singleton.getInstance();
+//
+//        if (obj1 == obj2) {
+//            System.out.println("같은 Singleton 객체입니다.");
+//        } else {
+//            System.out.println("다른 Singleton 객체입니다.");
+//        }
 
 //        Chapter06 s1 = new Chapter06("그랜저", "검정", 250);
 //        System.out.println("s1 변수가 Chapter06 객체를 참조합니다.");
