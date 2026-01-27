@@ -1,16 +1,5 @@
 package com.mjc813;
 
-class Korean {
-    String nation = "대한민국";
-    String name;
-    String ssn;
-
-    Korean(String name, String ssn) {
-        this.name = name;
-        this.ssn = ssn;
-    }
-}
-
 public class Chapter06 {
     String model = "그랜져";
     String company = "현대자동차";
