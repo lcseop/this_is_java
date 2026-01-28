@@ -103,6 +103,7 @@ public class Main {
         stu1.mintermExamClass(clsKor, 20);
         stu1.mintermExamClass(clsKor, 30);
         stu1.finishClass(clsKor);
+        stu1.finalExamClass(clsKor, 40);
 
         stu1.getClasses();
     }

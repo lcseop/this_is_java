@@ -30,7 +30,11 @@ public class Student {
     public void getClasses() {
         System.out.println("-----현재 " + name + "이(가) 신청중인 과목들------");
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
-            System.out.println(this.getStudySubject().get(i).getClassName() + ": " + this.getStudySubject().get(i).getScore() + "점");
+            String print = this.getStudySubject().get(i).getClassName() + ": " + this.getStudySubject().get(i).getScore() + "점";
+            if (this.getStudySubject().get(i).isClose()) {
+                print += " [닫힘]";
+            }
+            System.out.println(print);
         }
         System.out.println("---------------------------------------");
     }
