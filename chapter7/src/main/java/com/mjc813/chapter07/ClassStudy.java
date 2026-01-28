@@ -7,13 +7,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class ClassStudy {
     private String className;
     private int score = 0;
     private boolean mintermExam = false;
     private boolean finalExam = false;
+    private boolean close = false;
+
+    public ClassStudy(String className) {
+        this.setClassName(className);
+    }
 
     public void isScoreRange() {
         if (this.getScore() < 0) {

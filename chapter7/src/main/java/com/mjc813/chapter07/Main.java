@@ -64,5 +64,46 @@ public class Main {
         parent.method1();
         parent.method2();
 //      parent.method3(); (호출 불가능)
+
+        System.out.println("------------------------- 개인과제4");
+        Student stu1 = new Student("성이름", "111-1111");
+
+        ClassStudy clsMath = new ClassStudy("수학");
+        ClassStudy clsEng = new ClassStudy("영어");
+        ClassStudy clsKor = new ClassStudy("국어");
+
+        stu1.classRegistration(clsMath);
+
+        stu1.getClasses();
+
+        stu1.classRegistration(clsEng);
+        stu1.classRegistration(clsKor);
+
+        stu1.getClasses();
+
+        stu1.attendanceClass(clsMath);
+        stu1.attendanceClass(clsMath);
+        stu1.attendanceClass(clsMath);
+        stu1.mintermExamClass(clsMath, 30);
+        stu1.mintermExamClass(clsMath, 30);
+        stu1.finalExamClass(clsMath, 15);
+        stu1.finishClass(clsMath);
+
+        stu1.getClasses();
+
+        stu1.attendanceClass(clsEng);
+        stu1.attendanceClass(clsEng);
+        stu1.mintermExamClass(clsEng, 40);
+        stu1.finalExamClass(clsEng, 50);
+        stu1.finishClass(clsEng);
+
+        stu1.getClasses();
+
+        stu1.attendanceClass(clsKor);
+        stu1.mintermExamClass(clsKor, 20);
+        stu1.mintermExamClass(clsKor, 30);
+        stu1.finishClass(clsKor);
+
+        stu1.getClasses();
     }
 }
