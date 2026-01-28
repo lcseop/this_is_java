@@ -1,11 +1,9 @@
 package com.mjc813.chapter07;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import java.util.*;
 
-@Getter
-@Setter
+@Data
 public class Student {
     private String name;
     private String ssn;

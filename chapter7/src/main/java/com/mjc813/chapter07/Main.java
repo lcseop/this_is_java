@@ -1,5 +1,11 @@
 package com.mjc813.chapter07;
 
+import com.mjc813.chapter07.abst.*;
+import com.mjc813.chapter07.inst.*;
+import com.mjc813.chapter07.poly.*;
+import com.mjc813.chapter07.seals.*;
+import com.mjc813.chapter07.typeChange.*;
+
 public class Main {
     public static void main(String[] args) {
         SmartPhone myPhone = new SmartPhone("갤럭시", "은색");
@@ -106,5 +112,87 @@ public class Main {
         stu1.finalExamClass(clsKor, 40);
 
         stu1.getClasses();
+
+        System.out.println("------------------------- p.313 강제 타입 변환");
+        Parent2 parent2 = new Child2();
+
+        parent2.setField1("data1");
+        parent2.method1();
+        parent2.method2();
+
+        Child2 child2 = (Child2) parent2;
+
+        child2.setField2("data2");
+        child2.method3();
+
+        System.out.println("------------------------- p.317 다형성");
+        TireCar myCar = new TireCar();
+
+        myCar.setTire(new Tire());
+        myCar.run();
+
+        myCar.setTire(new HankookTire());
+        myCar.run();
+
+        myCar.setTire(new KumhoTire());
+        myCar.run();
+
+        System.out.println("------------------------- p.320 매개변수 다형성");
+        Driver driver = new Driver();
+
+        Bus bus = new Bus();
+        driver.drive(bus);
+
+        Taxi taxi = new Taxi();
+        driver.drive(taxi);
+
+        System.out.println("------------------------- p.323 객체 타입 확인");
+        Person p1 = new Person("홍길동");
+        personInfo(p1);
+
+        Person p2 = new Student2("김길동", 10);
+        personInfo(p2);
+
+        System.out.println("------------------------- p.327 추상 클래스 선언");
+        SmartPhone2 smartPhone = new SmartPhone2("홍길동");
+
+        smartPhone.turnOn();
+        smartPhone.internetSearch();
+        smartPhone.turnOff();
+
+        Dog dog = new Dog();
+        dog.sound();
+
+        Cat cat = new Cat();
+        cat.sound();
+
+        animalSound(dog);
+        animalSound(cat);
+
+        System.out.println("------------------------- p.333 봉인된 클래스");
+        Person2 p = new Person2();
+        Employee em = new Employee();
+        Manager m = new Manager();
+        Director di = new Director();
+
+        p.work();
+        em.work();
+        m.work();
+        di.work();
+
+    }
+
+    public static void animalSound(Animal animal) {
+        animal.sound();
+    }
+
+    public static void personInfo(Person person) {
+        System.out.println("name: " + person.getName());
+        person.walk();
+
+        if (person instanceof Student2 stu) {
+            System.out.println("studentNo: " + stu.getStudentNo());
+            stu.study();
+        }
     }
 }

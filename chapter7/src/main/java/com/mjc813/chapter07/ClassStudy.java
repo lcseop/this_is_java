@@ -1,10 +1,8 @@
 package com.mjc813.chapter07;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ClassStudy {
     private String className;
     private int score = 0;
