@@ -84,8 +84,8 @@ public class Main {
         stu1.attendanceClass(clsMath);
         stu1.attendanceClass(clsMath);
         stu1.attendanceClass(clsMath);
-        stu1.mintermExamClass(clsMath, 30);
-        stu1.mintermExamClass(clsMath, 30);
+        stu1.mintermExamClass(clsMath, 45);
+        stu1.mintermExamClass(clsMath, 35);
         stu1.finalExamClass(clsMath, 15);
         stu1.finishClass(clsMath);
 
@@ -93,7 +93,7 @@ public class Main {
 
         stu1.attendanceClass(clsEng);
         stu1.attendanceClass(clsEng);
-        stu1.mintermExamClass(clsEng, 40);
+        stu1.mintermExamClass(clsEng, 50);
         stu1.finalExamClass(clsEng, 50);
         stu1.finishClass(clsEng);
 

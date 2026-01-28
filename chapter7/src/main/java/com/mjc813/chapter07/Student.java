@@ -32,7 +32,7 @@ public class Student {
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
             String print = this.getStudySubject().get(i).getClassName() + ": " + this.getStudySubject().get(i).getScore() + "점";
             if (this.getStudySubject().get(i).isClose()) {
-                print += " [닫힘]";
+                print += " [" + this.getStudySubject().get(i).getGrade() + "]";
             }
             System.out.println(print);
         }
@@ -107,13 +107,13 @@ public class Student {
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
             if (this.getStudySubject().get(i) == cls) {
                 if (!(this.getStudySubject().get(i).isClose())) {
-                    this.getStudySubject().get(i).setClose(true);
+                    this.getStudySubject().get(i).closeClass();
                     System.out.println(this.getStudySubject().get(i).getClassName() + " 과목이 마무리 되었습니다.");
-                    System.out.println(this.getName() + "의 최종 점수 : " + this.getStudySubject().get(i).getScore());
+                    System.out.println(this.getName() + "의 최종 점수 : " + this.getStudySubject().get(i).getScore() + " [" + this.getStudySubject().get(i).getGrade() + "]");
                     return; }
                 else {
                     System.out.println(this.getStudySubject().get(i).getClassName() + " 과목은 이미 닫혔습니다.");
-                    System.out.println(this.getStudySubject().get(i).getClassName() + "의 점수 : " + this.getStudySubject().get(i).getScore());
+                    System.out.println(this.getStudySubject().get(i).getClassName() + "의 점수 : " + this.getStudySubject().get(i).getScore() + " [" + this.getStudySubject().get(i).getGrade() + "]");
                     return;
                 }
             }
