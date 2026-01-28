@@ -16,6 +16,7 @@ public class Student {
         this.setSsn(ssn);
     }
 
+    // 수강신청
     public void classRegistration(ClassStudy cls) {
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
             if (this.getStudySubject().get(i) == cls) {
@@ -27,6 +28,7 @@ public class Student {
         System.out.println(cls.getClassName() + "의 수강 신청이 완료되었습니다.");
     }
 
+    // 과목 목록
     public void getClasses() {
         System.out.println("-----현재 " + name + "이(가) 신청중인 과목들------");
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
@@ -39,17 +41,24 @@ public class Student {
         System.out.println("---------------------------------------");
     }
 
+    // 과목 버리기
     public void classRemove(ClassStudy cls) {
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
             if (this.getStudySubject().get(i) == cls) {
-                System.out.println(this.getStudySubject().get(i).getClassName() + "의 과목을 버렸습니다.");
-                this.getStudySubject().remove(i);
-                return;
+                if (!(this.getStudySubject().get(i).isClose())) {
+                    System.out.println(this.getStudySubject().get(i).getClassName() + "의 과목을 버렸습니다.");
+                    this.getStudySubject().remove(i);
+                    return;
+                }
+                else {
+                    System.out.println(this.getStudySubject().get(i).getClassName() + " 과목은 이미 닫혀 버릴 수 없습니다.");
+                }
             }
         }
-        System.out.println("해당 과목을 신청하고 있지 않습니다.");
+        System.out.println(cls.getClassName() + " 과목을 신청하고 있지 않습니다.");
     }
 
+    // 출석 점수 부여
     public void attendanceClass(ClassStudy cls) {
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
             if (this.getStudySubject().get(i) == cls) {
@@ -66,6 +75,7 @@ public class Student {
         System.out.println(cls.getClassName() + " 과목을 신청하고 있지 않습니다.");
     }
 
+    // 중간고사 점수 부여
     public void mintermExamClass(ClassStudy cls, int score) {
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
             if (this.getStudySubject().get(i) == cls) {
@@ -85,6 +95,7 @@ public class Student {
         System.out.println(cls.getClassName() + " 과목을 신청하고 있지 않습니다.");
     }
 
+    // 기말고사 점수 부여
     public void finalExamClass(ClassStudy cls, int score) {
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
             if (this.getStudySubject().get(i) == cls) {
@@ -103,6 +114,7 @@ public class Student {
         System.out.println(cls.getClassName() + " 과목을 신청하고 있지 않습니다.");
     }
 
+    // 학기 종료
     public void finishClass(ClassStudy cls) {
         for (int i = 0; i < this.getStudySubject().toArray().length; i++) {
             if (this.getStudySubject().get(i) == cls) {

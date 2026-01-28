@@ -17,6 +17,7 @@ public class ClassStudy {
         this.setClassName(className);
     }
 
+    // 100점 초과 방지
     public void isScoreRange() {
         if (this.getScore() < 0) {
             this.setScore(0);
@@ -25,6 +26,7 @@ public class ClassStudy {
         }
     }
 
+    // 학점 부여
     public void closeClass() {
         this.setClose(true);
         if (this.getScore() >= 95) {
@@ -56,6 +58,7 @@ public class ClassStudy {
         }
     }
 
+    // 점수 부여
     public void setScore(int score) {
         this.score = score;
         this.isScoreRange();
