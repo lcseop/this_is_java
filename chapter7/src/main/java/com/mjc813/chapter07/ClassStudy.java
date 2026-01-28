@@ -25,4 +25,9 @@ public class ClassStudy {
             this.setScore(100);
         }
     }
+
+    public void setScore(int score) {
+        this.score = score;
+        this.isScoreRange();
+    }
 }
