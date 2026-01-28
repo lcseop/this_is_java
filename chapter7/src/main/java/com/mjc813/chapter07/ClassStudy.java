@@ -27,29 +27,29 @@ public class ClassStudy {
 
     public void closeClass() {
         this.setClose(true);
-        if (score >= 95) {
+        if (this.getScore() >= 95) {
             this.setGrade("A+");
-        } else if (score >= 90) {
+        } else if (this.getScore() >= 90) {
             this.setGrade("A0");
-        } else if (score >= 87) {
+        } else if (this.getScore() >= 87) {
             this.setGrade("A-");
-        } else if (score >= 85) {
+        } else if (this.getScore() >= 85) {
             this.setGrade("B+");
-        } else if (score >= 82) {
+        } else if (this.getScore() >= 82) {
             this.setGrade("B0");
-        } else if (score >= 80) {
+        } else if (this.getScore() >= 80) {
             this.setGrade("B-");
-        } else if (score >= 77) {
+        } else if (this.getScore() >= 77) {
             this.setGrade("C+");
-        } else if (score >= 75) {
+        } else if (this.getScore() >= 75) {
             this.setGrade("C0");
-        } else if (score >= 72) {
+        } else if (this.getScore() >= 72) {
             this.setGrade("C-");
-        } else if (score >= 70) {
+        } else if (this.getScore() >= 70) {
             this.setGrade("D+");
-        } else if (score >= 67) {
+        } else if (this.getScore() >= 67) {
             this.setGrade("D0");
-        } else if (score >= 65) {
+        } else if (this.getScore() >= 65) {
             this.setGrade("D-");
         } else {
             this.setGrade("F");
