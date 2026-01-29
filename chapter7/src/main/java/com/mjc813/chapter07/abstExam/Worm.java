@@ -1,8 +1,8 @@
 package com.mjc813.chapter07.abstExam;
 
-public class Swam extends Animals {
+public class Worm extends Animals {
 
-    public Swam() {
+    public Worm() {
         super("지렁이");
     }
 

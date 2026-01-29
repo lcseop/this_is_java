@@ -9,7 +9,7 @@ public class Rabbit extends Animals {
     @Override
     public Animals eat(Animals animal) {
         if ( !(animal.isDeath()) && !(this.isDeath()) ) {
-            if (animal instanceof Swam s) {
+            if (animal instanceof Worm s) {
                 System.out.println(this.getSpecies() + "이(가) " + s.getSpecies() + "을(를) 잡아먹었습니다.");
                 return s;
             } else {

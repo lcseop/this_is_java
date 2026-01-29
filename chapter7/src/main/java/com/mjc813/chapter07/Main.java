@@ -185,10 +185,10 @@ public class Main {
         Rabbit rabbit = new Rabbit();
         Tiger tiger = new Tiger();
         Fox fox = new Fox();
-        Swam swam = new Swam();
-        Swam swam2 = new Swam();
+        Worm worm = new Worm();
+        Worm worm2 = new Worm();
 
-        rabbit.setEatTarget(rabbit.eat(swam));
+        rabbit.setEatTarget(rabbit.eat(worm));
         System.out.println(rabbit.getEatTarget().getSpecies());
         rabbit.breathe();
 
@@ -199,12 +199,12 @@ public class Main {
 
         tiger.breathe();
         tiger.setEatTarget(tiger.eat(fox));
-        tiger.setEatTarget(tiger.eat(swam2));
+        tiger.setEatTarget(tiger.eat(worm2));
         tiger.setEatTarget(tiger.eat(rabbit));
         tiger.poo();
 
-        swam.setEatTarget(swam.eat(fox));
-        swam.breathe();
+        worm.setEatTarget(worm.eat(fox));
+        worm.breathe();
 
     }
 
