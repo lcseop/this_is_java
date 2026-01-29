@@ -194,7 +194,7 @@ public class Main {
 
         fox.setEatTarget(fox.eat(tiger));
         rabbit.poo();
-        System.out.println(rabbit.getEatTarget());
+        rabbit.poo();
         fox.breathe();
 
         tiger.breathe();

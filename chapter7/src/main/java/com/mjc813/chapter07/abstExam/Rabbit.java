@@ -9,9 +9,9 @@ public class Rabbit extends Animals {
     @Override
     public Animals eat(Animals animal) {
         if ( !(animal.isDeath()) && !(this.isDeath()) ) {
-            if (animal instanceof Swam) {
-                System.out.println(this.getSpecies() + "이(가) " + animal.getSpecies() + "을(를) 잡아먹었습니다.");
-                return animal;
+            if (animal instanceof Swam s) {
+                System.out.println(this.getSpecies() + "이(가) " + s.getSpecies() + "을(를) 잡아먹었습니다.");
+                return s;
             } else {
                 System.out.println(animal.getSpecies() + "은(는) " + this.getSpecies() + "의 주식이 아닙니다.");
                 return this.getEatTarget();
