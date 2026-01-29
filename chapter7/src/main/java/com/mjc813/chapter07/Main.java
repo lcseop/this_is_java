@@ -1,6 +1,7 @@
 package com.mjc813.chapter07;
 
 import com.mjc813.chapter07.abst.*;
+import com.mjc813.chapter07.abstExam.*;
 import com.mjc813.chapter07.inst.*;
 import com.mjc813.chapter07.poly.*;
 import com.mjc813.chapter07.seals.*;
@@ -179,6 +180,31 @@ public class Main {
         em.work();
         m.work();
         di.work();
+
+        System.out.println("------------------------- 추상클래스 개인과제1");
+        Rabbit rabbit = new Rabbit();
+        Tiger tiger = new Tiger();
+        Fox fox = new Fox();
+        Swam swam = new Swam();
+        Swam swam2 = new Swam();
+
+        rabbit.setEatTarget(rabbit.eat(swam));
+        System.out.println(rabbit.getEatTarget().getSpecies());
+        rabbit.breathe();
+
+        fox.setEatTarget(fox.eat(tiger));
+        rabbit.poo();
+        System.out.println(rabbit.getEatTarget());
+        fox.breathe();
+
+        tiger.breathe();
+        tiger.setEatTarget(tiger.eat(fox));
+        tiger.setEatTarget(tiger.eat(swam2));
+        tiger.setEatTarget(tiger.eat(rabbit));
+        tiger.poo();
+
+        swam.setEatTarget(swam.eat(fox));
+        swam.breathe();
 
     }
 
