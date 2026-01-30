@@ -8,6 +8,10 @@ import com.mjc813.promotion.*;
 import com.mjc813.argspoly.*;
 import com.mjc813.instance.*;
 import com.mjc813.seal.*;
+import com.mjc813.exam5.*;
+import com.mjc813.exam6.*;
+import com.mjc813.exam7.*;
+import com.mjc813.exam8.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -164,11 +168,45 @@ public class Main {
         ic2.methodA();
         ic2.methodB();
         ic2.methodC();
+
+        System.out.println("------------------------p.391 5번 문제");
+        Remocon r = new TV();
+        r.powerOn();
+
+        System.out.println("------------------------p.391 6번 문제");
+        printSound(new SCat());
+        printSound(new SDog());
+
+        System.out.println("------------------------p.392 7번 문제");
+        dbWork(new OracleDao());
+        dbWork(new MySqlDao());
+
+        System.out.println("------------------------p.392 8번 문제");
+        action(new ExamB());
+        action(new ExamC());
     }
     public static void ride(IVehicle vehicle) {
         if (vehicle instanceof IBus bus) {
             bus.checkFare();
         }
         vehicle.run();
+    }
+
+    public static void printSound(Soundable soundable) {
+        System.out.println(soundable.sound());
+    }
+
+    public static void dbWork(DataAccessObject dao) {
+        dao.select();
+        dao.insert();
+        dao.update();
+        dao.delete();
+    }
+
+    public static void action(ExamA a) {
+        a.method1();
+        if (a instanceof ExamC c) {
+            c.method2();
+        }
     }
 }
