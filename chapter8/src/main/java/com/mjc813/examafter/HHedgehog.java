@@ -7,10 +7,10 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class HSmallDog extends Mammalias {
-    final private String type = "소형견";
+public class HHedgehog extends Insectivora {
+    final private String type = "고슴도치";
 
-    public HSmallDog (String name, String id, HDoctor doctor, LocalDate inDate, LocalDate outDate, HHuman master) {
+    public HHedgehog(String name, String id, HDoctor doctor, LocalDate inDate, LocalDate outDate, HHuman master) {
         this.setName(name);
         this.setId(id);
         this.setDoctor(doctor);
@@ -20,6 +20,6 @@ public class HSmallDog extends Mammalias {
     }
 
     public void eat() {
-        System.out.println("소형견 " + this.getName() + "이 개사료를 먹습니다.");
+        System.out.println("고슴도치 " + this.getName() + "이(가) 고슴도치 사료를 먹습니다.");
     }
 }

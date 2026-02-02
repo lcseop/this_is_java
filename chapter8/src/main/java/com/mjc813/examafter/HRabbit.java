@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class HRabbit extends HPatient {
+public class HRabbit extends Mammalias {
     final private String type = "토끼";
 
     public HRabbit (String name, String id, HDoctor doctor, LocalDate inDate, LocalDate outDate, HHuman master) {
