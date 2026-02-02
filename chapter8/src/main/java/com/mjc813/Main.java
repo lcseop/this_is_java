@@ -194,8 +194,8 @@ public class Main {
         HNurse nurse1 = new HNurse(hospital, "김간호");
         HHuman human1 = new HHuman("김주인");
         HHuman human2 = new HHuman("이주인");
-        HPatient rabbit1 = new HPatient("김토끼", "1", doctor1, LocalDate.of(2026,2,2), LocalDate.of(1900, 1, 1), human1, HAnimalType.토끼);
-        HPatient dog1 = new HPatient("멍멍이", "2", doctor1, LocalDate.of(2026,1,2), LocalDate.of(1900, 1, 1), human2, HAnimalType.소형견);
+        HPatient rabbit1 = new HRabbit("김토끼", "1", doctor1, LocalDate.of(2026,2,2), LocalDate.of(1900, 1, 1), human1);
+        HPatient dog1 = new HSmallDog("멍멍이", "2", doctor1, LocalDate.of(2026,1,2), LocalDate.of(1900, 1, 1), human2);
         hospital.getDoctors().add(doctor1);
         hospital.getNurses().add(nurse1);
         hospital.getParents().add(rabbit1);

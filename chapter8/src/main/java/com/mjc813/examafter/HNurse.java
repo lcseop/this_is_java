@@ -16,7 +16,7 @@ public class HNurse {
             if (name.equals(hospital.getParents().get(i).getName()) && id.equals(hospital.getParents().get(i).getId())) {
                 if (hospital.getParents().get(i).getFeed() < 3) {
                     hospital.getParents().get(i).setFeed(hospital.getParents().get(i).getFeed() + 1);
-                    System.out.println("간호사 " + this.getName() + "이(가) " + hospital.getParents().get(i).getName() + "에게 약을 먹였습니다.");
+                    System.out.println("간호사 " + this.getName() + "이(가) " + hospital.getParents().get(i).getType() + " " + hospital.getParents().get(i).getName() + "에게 약을 먹였습니다.");
                     System.out.println("오늘 약 먹은 횟수 : " + hospital.getParents().get(i).getFeed() + " / 3");
                     return;
                 } else {
