@@ -189,36 +189,8 @@ public class Main {
         action(new ExamC());
 
         System.out.println("------------------------오후 과제 동물 병원");
-        Hospital hospital = new Hospital();
-        HDoctor doctor1 = new HDoctor("김의사");
-        HNurse nurse1 = new HNurse(hospital, "김간호");
-        HHuman human1 = new HHuman("김주인");
-        HHuman human2 = new HHuman("이주인");
-        HPatient rabbit1 = new HRabbit("김토끼", "1", doctor1, LocalDate.of(2026,2,2), LocalDate.of(1900, 1, 1), human1);
-        HPatient dog1 = new HSmallDog("멍멍이", "2", doctor1, LocalDate.of(2026,1,2), LocalDate.of(1900, 1, 1), human2);
-        hospital.getDoctors().add(doctor1);
-        hospital.getNurses().add(nurse1);
-        hospital.getParents().add(rabbit1);
-        hospital.getParents().add(dog1);
-
-        Hospital.setTime(hospital, 15);
-
-        nurse1.feedDrug("김토끼", "1");
-        nurse1.feedDrug("멍멍이", "1");
-        nurse1.feedDrug("멍멍이", "2");
-
-        human1.visitPet(hospital, "멍멍이", "2");
-        human1.visitPet(hospital, "김토끼", "1");
-        human2.visitPet(hospital ,"멍멍이", "2");
-
-        Hospital.setTime(hospital, 21);
-        human2.visitPet(hospital ,"멍멍이", "2");
-        human1.visitPet(hospital, "김토끼", "1");
-        nurse1.feedDrug("김토끼", "1");
-        nurse1.feedDrug("김토끼", "1");
-        nurse1.feedDrug("김토끼", "1");
-
-        rabbit1.eat();
+        AnimalHospital hos = new AnimalHospital();
+        hos.lifeOfHospital();
 
     }
 
