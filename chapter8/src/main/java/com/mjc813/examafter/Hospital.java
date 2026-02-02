@@ -28,7 +28,6 @@ public class Hospital {
         ArrayList<HPatient> birds = new ArrayList<HPatient>();
 
         for (int i = 0; i < this.getPatients().toArray().length; i++) {
-            System.out.println(this.getPatients().get(i).getCategory());
             switch(this.getPatients().get(i).getCategory()) {
                 case "포유류" :
                     mammalias.add(this.getPatients().get(i));
