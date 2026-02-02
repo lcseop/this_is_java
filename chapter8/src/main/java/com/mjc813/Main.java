@@ -218,6 +218,8 @@ public class Main {
         nurse1.feedDrug("김토끼", "1");
         nurse1.feedDrug("김토끼", "1");
 
+        rabbit1.eat();
+
     }
 
     public static void ride(IVehicle vehicle) {

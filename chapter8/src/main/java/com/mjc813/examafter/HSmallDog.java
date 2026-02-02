@@ -10,8 +10,16 @@ import java.time.LocalDate;
 public class HSmallDog extends HPatient {
     final private String type = "소형견";
 
+    public HSmallDog (String name, String id, HDoctor doctor, LocalDate inDate, LocalDate outDate, HHuman master) {
+        this.setName(name);
+        this.setId(id);
+        this.setDoctor(doctor);
+        this.setInDate(inDate);
+        this.setOutDate(outDate);
+        this.setMaster(master);
+    }
 
-    public HSmallDog(String name, String id, HDoctor doctor, LocalDate inDate, LocalDate outDate, HHuman master) {
-        super(name, id, doctor, inDate, outDate, master);
+    public void eat() {
+        System.out.println("소형견 " + this.getName() + "이 개사료를 먹습니다.");
     }
 }
