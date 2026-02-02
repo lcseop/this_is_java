@@ -12,6 +12,9 @@ import com.mjc813.exam5.*;
 import com.mjc813.exam6.*;
 import com.mjc813.exam7.*;
 import com.mjc813.exam8.*;
+import com.mjc813.examafter.*;
+
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
@@ -184,7 +187,39 @@ public class Main {
         System.out.println("------------------------p.392 8번 문제");
         action(new ExamB());
         action(new ExamC());
+
+        System.out.println("------------------------오후 과제 동물 병원");
+        Hospital hospital = new Hospital();
+        HDoctor doctor1 = new HDoctor("김의사");
+        HNurse nurse1 = new HNurse(hospital, "김간호");
+        HHuman human1 = new HHuman("김주인");
+        HHuman human2 = new HHuman("이주인");
+        HPatient rabbit1 = new HPatient("김토끼", "1", doctor1, LocalDate.of(2026,2,2), LocalDate.of(1900, 1, 1), human1, HAnimalType.토끼);
+        HPatient dog1 = new HPatient("멍멍이", "2", doctor1, LocalDate.of(2026,1,2), LocalDate.of(1900, 1, 1), human2, HAnimalType.소형견);
+        hospital.getDoctors().add(doctor1);
+        hospital.getNurses().add(nurse1);
+        hospital.getParents().add(rabbit1);
+        hospital.getParents().add(dog1);
+
+        Hospital.setTime(hospital, 15);
+
+        nurse1.feedDrug("김토끼", "1");
+        nurse1.feedDrug("멍멍이", "1");
+        nurse1.feedDrug("멍멍이", "2");
+
+        human1.visitPet(hospital, "멍멍이", "2");
+        human1.visitPet(hospital, "김토끼", "1");
+        human2.visitPet(hospital ,"멍멍이", "2");
+
+        Hospital.setTime(hospital, 21);
+        human2.visitPet(hospital ,"멍멍이", "2");
+        human1.visitPet(hospital, "김토끼", "1");
+        nurse1.feedDrug("김토끼", "1");
+        nurse1.feedDrug("김토끼", "1");
+        nurse1.feedDrug("김토끼", "1");
+
     }
+
     public static void ride(IVehicle vehicle) {
         if (vehicle instanceof IBus bus) {
             bus.checkFare();
