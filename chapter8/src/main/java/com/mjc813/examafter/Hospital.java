@@ -52,7 +52,7 @@ public class Hospital {
             System.out.println(birds.get(i).getType() + " " + birds.get(i).getName());
         }
 
-        System.out.println("---------- 포유류 병실 ----------");
+        System.out.println("---------- 식충목 병실 ----------");
         for (int i = 0; i < insectivora.toArray().length; i++) {
             System.out.println(insectivora.get(i).getType() + " " + insectivora.get(i).getName());
         }
