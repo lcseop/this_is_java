@@ -1,0 +1,3 @@
+rootProject.name = 'gradle_user_module'
+include 'gson_module'
+include 'main_module'
