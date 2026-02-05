@@ -1,11 +1,16 @@
 package com.mjc813.life;
 
 import com.mjc813.banking.BankAccount;
+import com.mjc813.banking.IMachine;
 import com.mjc813.banking.MachineNotWorkingException;
 import com.mjc813.banking.SendMachine;
 import com.mjc813.student.Student;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class LifeOfStudentWithBank {
+    private final IMachine machine;
+
     public void doToday() {
         Student lcs = new Student("이충섭", "2022261052");
         Student cwc = new Student("삼충섭", "2023261052");

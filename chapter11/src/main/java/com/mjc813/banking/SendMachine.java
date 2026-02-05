@@ -1,6 +1,6 @@
 package com.mjc813.banking;
 
-public class SendMachine {
+public class SendMachine implements IMachine {
 	public boolean isActive() throws MachineNotWorkingException {
 		if ( Math.random() >= 0.3 ) {
 			return true;

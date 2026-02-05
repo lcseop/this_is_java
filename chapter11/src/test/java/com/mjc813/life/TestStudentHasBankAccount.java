@@ -1,6 +1,8 @@
 package com.mjc813.life;
 
 import com.mjc813.banking.BankAccount;
+import com.mjc813.banking.IMachine;
+import com.mjc813.banking.MachineNotWorkingException;
 import com.mjc813.student.Student;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -56,8 +58,25 @@ public class TestStudentHasBankAccount {
 				new Student("이순신", "lss9876")
 				, new BankAccount("567-372-2983", "이순신")
 		);
-		LifeOfStudentWithBank losw = new LifeOfStudentWithBank();
+		IMachine allGoodMachine = new IMachine() {
+			@Override
+			public boolean isActive() throws MachineNotWorkingException {
+				return true;
+			}
+		};
+		IMachine brokenMachine = new IMachine() {
+			@Override
+			public boolean isActive() throws MachineNotWorkingException {
+				return false;
+			}
+		};
+		LifeOfStudentWithBank losw = new LifeOfStudentWithBank(allGoodMachine);
 		losw.sendMoney(stuBank1, stuBank2, 50000);
+		assertThat(stuBank1.getBankAccount().getMoney()).isEqualTo(-50000);
+		assertThat(stuBank2.getBankAccount().getMoney()).isEqualTo(50000);
+
+		LifeOfStudentWithBank brokenSWB = new LifeOfStudentWithBank(brokenMachine);
+		brokenSWB.sendMoney(stuBank2, stuBank1, 10000);
 		assertThat(stuBank1.getBankAccount().getMoney()).isEqualTo(-50000);
 		assertThat(stuBank2.getBankAccount().getMoney()).isEqualTo(50000);
 	}
