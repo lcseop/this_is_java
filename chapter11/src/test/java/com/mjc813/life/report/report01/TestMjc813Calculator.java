@@ -16,7 +16,7 @@ public class TestMjc813Calculator {
 		NullPointerException exception2 = assertThrows(NullPointerException.class, () -> {
 			mjc813cal.sum(3, null, 1);
 		});
-//		assertThat(mjc813cal.sum(3, null, 1)).isEqualTo(4);
+		assertThat(mjc813cal.strongSum(3, null, 1)).isEqualTo(4);
 
 		NullPointerException exception3 = assertThrows(NullPointerException.class, () -> {
 			mjc813cal.sum(null, 0, 1);
