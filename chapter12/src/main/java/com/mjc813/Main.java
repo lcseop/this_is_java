@@ -1,0 +1,61 @@
+package com.mjc813;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Example st = new Example();
+        System.out.println("--------------p526 StringTokenizer");
+        st.stringTokenExam();
+        System.out.println("--------------p528 박싱");
+        st.boxingUnBoxingExam();
+        System.out.println("--------------p530 포장 값 비교");
+        st.valueCompareExam();
+        System.out.println("--------------p531 수학 클래스");
+        st.mathExam();
+        System.out.println("--------------p533 Random");
+        st.randomExam();
+        System.out.println("--------------p535 Date 클래스");
+        st.dateExam();
+        System.out.println("--------------p537 Calendar 클래스");
+        st.calendarExam();
+        System.out.println("--------------p538 TimeZone 클래스");
+        st.losAngelesExam();
+//        System.out.println("--------------p539 시간대 ID 출력");
+//        st.printTimeZoneId();
+        System.out.println("--------------p541 현재 시간에서 연산");
+        st.dateTimeOperationExam();
+        System.out.println("--------------p542 날짜 비교");
+        st.dateTimeCompareExam();
+        System.out.println("--------------p545 DecimalFormat");
+        st.decimalFormatExam();
+        System.out.println("--------------p546 SimpleDateFormat");
+        st.simpleDateFormatExam();
+        System.out.println("--------------p548 Pattern 클래스로 검증");
+        st.patternExam();
+        System.out.println("--------------p551 패키지와 타입 정보 얻기");
+        st.getClassExam();
+        System.out.println("--------------p553 멤버 정보 얻기");
+        st.reflectionExam();
+        System.out.println("--------------p561 어노테이션 설정 정보 이용");
+        st.printAnnotationExam();
+        System.out.println("--------------확인문제5");
+        st.studentExam();
+        System.out.println("--------------확인문제6");
+        st.memberExam();
+        System.out.println("--------------확인문제8");
+        st.exam8();
+        System.out.println("--------------확인문제9");
+        st.decodingExam();
+        System.out.println("--------------확인문제10");
+        st.stringBuilderExam();
+        System.out.println("--------------확인문제11");
+        st.exam11();
+        System.out.println("--------------확인문제12");
+        st.integerCompareExam();
+        System.out.println("--------------확인문제15");
+        st.exam15();
+        System.out.println("--------------확인문제16");
+        st.exam16();
+        System.out.println("--------------확인문제17");
+        st.exam17();
+    }
+}
