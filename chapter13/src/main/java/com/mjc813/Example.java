@@ -93,17 +93,17 @@ public class Example {
         NintendoGameService<NintendoGame> ngs = new NintendoGameService<NintendoGame>();
         ngs.add(mk);
         ngs.add(zl);
-        System.out.println(ngs.size());
+        System.out.println("닌텐도 게임 목록 사이즈 : " + ngs.size());
         ngs.add(mg);
-        System.out.println(ngs.size());
+        System.out.println("닌텐도 게임 목록 사이즈 : " + ngs.size());
 
-        System.out.println(ngs.set(1, wg));
-        System.out.println(ngs.set(0, mr));
-        System.out.println(ngs.remove(2));
-        System.out.println(ngs.get(3));
+        System.out.println("수박게임을 인덱스 1에 넣음 : " + ngs.set(1, wg));
+        System.out.println("마리오를 인덱스 0에 넣음 : " + ngs.set(0, mr));
+        System.out.println("인덱스 2에 있는 수박게임을 제거함 : " + ngs.remove(2));
+        System.out.println("인덱스 3에 있는 마리오골프를 가져옴 : " + ngs.get(3));
 
-        System.out.println(ngs.getJson(2));
-        System.out.println(ngs.getJsonAllItems());
+        System.out.println("-----2번 인덱스 JSON 추출 \n" + ngs.getJson(2));
+        System.out.println("-----모든 게임 목록 JSON 추출 \n" + ngs.getJsonAllItems());
 
     }
 }

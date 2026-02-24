@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class NintendoGameService<G> implements CRUD<G> {
     private final List<G> gameList = new LinkedList<>();
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public void add(G item) {
@@ -43,7 +43,7 @@ public class NintendoGameService<G> implements CRUD<G> {
 
     @Override
     public String getJsonAllItems() {
-        String result = "[";
+        String result = "[\n";
         for (int i = 0; i < gameList.size(); i++) {
             result += gson.toJson(gameList.get(i)) + ",\n";
         }
