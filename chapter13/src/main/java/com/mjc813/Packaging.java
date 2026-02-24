@@ -1,9 +1,9 @@
 package com.mjc813;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Packaging {
-    private Object[] list = new Object[10];
+    private final Object[] list = new Object[10];
     private int index = -1;
 
     public void add(Object obj) {
