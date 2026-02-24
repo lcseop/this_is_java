@@ -11,5 +11,8 @@ public class Main {
         exam.genericInterfaceExample();
         System.out.println("-----------------------p579. 제네릭 타입 equals");
         exam.genericEqualsExample();
+        System.out.println("-----------------------개인과제4. 닌텐도 게임 홈페이지 리스트");
+        exam.nintendoCRUDExample();
+
     }
 }

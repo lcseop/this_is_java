@@ -1,5 +1,8 @@
 package com.mjc813;
 
+import com.mjc813.exam.*;
+import static com.mjc813.exam.Grade.*;
+
 public class Example {
     public void objectToGeneric() {
         Human human1 = new Human();
@@ -79,6 +82,28 @@ public class Example {
 
         boolean result = box1.compare(box2);
         System.out.println("result: " + result);
+    }
+    public void nintendoCRUDExample() {
+        NintendoGame mk = new NintendoGame("마리오카트", ALL, 69000);
+        NintendoGame zl = new NintendoGame("젤다의전설", AGE12_OVER, 89000);
+        NintendoGame mg = new NintendoGame("마리오골프", AGE15_OVER, 29000);
+        NintendoGame wg = new NintendoGame("수박게임", ALL, 7000);
+        NintendoGame mr = new NintendoGame("마리오", AGE12_OVER, 89000);
+
+        NintendoGameService<NintendoGame> ngs = new NintendoGameService<NintendoGame>();
+        ngs.add(mk);
+        ngs.add(zl);
+        System.out.println(ngs.size());
+        ngs.add(mg);
+        System.out.println(ngs.size());
+
+        System.out.println(ngs.set(1, wg));
+        System.out.println(ngs.set(0, mr));
+        System.out.println(ngs.remove(2));
+        System.out.println(ngs.get(3));
+
+        System.out.println(ngs.getJson(2));
+        System.out.println(ngs.getJsonAllItems());
 
     }
 }
