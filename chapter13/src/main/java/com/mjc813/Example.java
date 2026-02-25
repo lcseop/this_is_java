@@ -106,4 +106,104 @@ public class Example {
         System.out.println("-----모든 게임 목록 JSON 추출 \n" + ngs.getJsonAllItems());
 
     }
+
+    public void containerExample() {
+        Container<String> container1 = new Container<String>();
+        container1.set("홍길동");
+        String str = container1.get();
+
+        Container<Integer> container2 = new Container<Integer>();
+        container2.set(6);
+        int value = container2.get();
+
+        System.out.println(str + ", " + value);
+    }
+
+    public void containerMultiExample() {
+        Container2<String, String> container1 = new Container2<String, String>();
+        container1.set("홍길동", "도적");
+        String name1 = container1.getKey();
+        String job = container1.getValue();
+
+        Container2<String, Integer> container2 = new Container2<String, Integer>();
+        container2.set("홍길동", 35);
+        String name2 = container2.getKey();
+        int age = container2.getValue();
+
+        System.out.println(name1 + ": " + job);
+        System.out.println(name2 + ": " + age);
+    }
+
+    public void utilExample() {
+        Pair<String, Integer> pair = new Pair<>("홍길동", 35);
+        Integer age = Util.getValue(pair, "홍길동");
+        System.out.println(age);
+
+        ChildPair<String, Integer> childPair = new ChildPair<>("홍삼원", 20);
+        Integer childAge = Util.getValue(childPair, "홍삼순");
+        System.out.println(childAge);
+
+//        OtherPair<String, Integer> otherPair = new OtherPair<>("홍삼원", 20);
+//        int otherAge = Util.getValue(otherPair, "홍삼원");
+//        System.out.println(otherAge);
+
+    }
+
+    public void genericMethodExample() {
+        BoxM<Integer> box1 = boxing(100);
+        int intValue = box1.get();
+        System.out.println(intValue);
+
+        BoxM<String> box2 = boxing("홍길동");
+        String strValue = box2.get();
+        System.out.println(strValue);
+    }
+
+    public <T> BoxM<T> boxing(T t) {
+        BoxM<T> box = new BoxM<T>();
+        box.set(t);
+        return box;
+    }
+
+    public <T extends Number> boolean compare(T t1, T t2) {
+        System.out.println("compare(" + t1.getClass().getSimpleName() + ", " + t2.getClass().getSimpleName() + ")");
+        double v1 = t1.doubleValue();
+        double v2 = t2.doubleValue();
+
+        return (v1 == v2);
+    }
+
+    public void genericExtendsExample() {
+        boolean result1 = compare(10, 20);
+        System.out.println(result1);
+        System.out.println();
+
+        boolean result2 = compare(4.5, 4.5);
+        System.out.println(result2);
+    }
+
+    public void genericWildCardExample() {
+        Course.registerCourse1(new Applicant<Person>(new Person()));
+        Course.registerCourse1(new Applicant<Worker>(new Worker()));
+        Course.registerCourse1(new Applicant<Student>(new Student()));
+        Course.registerCourse1(new Applicant<HighStudent>(new HighStudent()));
+        Course.registerCourse1(new Applicant<MiddleStudent>(new MiddleStudent()));
+        System.out.println();
+
+
+//        Course.registerCourse2(new Applicant<Person>(new Person()));
+//        Course.registerCourse2(new Applicant<Worker>(new Worker()));
+        Course.registerCourse2(new Applicant<Student>(new Student()));
+        Course.registerCourse2(new Applicant<HighStudent>(new HighStudent()));
+        Course.registerCourse2(new Applicant<MiddleStudent>(new MiddleStudent()));
+        System.out.println();
+
+
+        Course.registerCourse3(new Applicant<Person>(new Person()));
+        Course.registerCourse3(new Applicant<Worker>(new Worker()));
+//        Course.registerCourse3(new Applicant<Student>(new Student()));
+//        Course.registerCourse3(new Applicant<HighStudent>(new HighStudent()));
+//        Course.registerCourse3(new Applicant<MiddleStudent>(new MiddleStudent()));
+        System.out.println();
+    }
 }

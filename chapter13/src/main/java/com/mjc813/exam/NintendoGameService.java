@@ -61,12 +61,12 @@ public class NintendoGameService<G> implements CRUD<G> {
 
     @Override
     public String getJsonAllItems() {
-        String result = "[\n";
+        StringBuilder result = new StringBuilder("[\n");
         for (int i = 0; i < gameList.size(); i++) {
-            result += (i != gameList.size()-1) ?
+            result.append((i != gameList.size()-1) ?
                     gson.toJson(gameList.get(i)) + ",\n" :
-                    gson.toJson(gameList.get(i)) + "\n]";
+                    gson.toJson(gameList.get(i)) + "\n]");
         }
-        return result;
+        return result.toString();
     }
 }
