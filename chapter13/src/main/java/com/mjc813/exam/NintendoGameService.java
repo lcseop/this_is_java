@@ -22,32 +22,51 @@ public class NintendoGameService<G> implements CRUD<G> {
 
     @Override
     public G set(int index, G item) {
-        gameList.add(index, item);
+        if (index < 0) {
+            gameList.addFirst(item);
+        } else if (index >= gameList.size()) {
+            gameList.add(item);
+        } else {
+            gameList.add(index, item);
+        }
         return item;
     }
 
     @Override
     public G remove(int index) {
-        return gameList.remove(index);
+        if (index < 0 || index >= gameList.size()) {
+            return null;
+        } else {
+            return gameList.remove(index);
+        }
     }
 
     @Override
     public G get(int index) {
-        return gameList.get(index);
+        if (index < 0 || index >= gameList.size()) {
+            return null;
+        } else {
+            return gameList.get(index);
+        }
     }
 
     @Override
     public String getJson(int index) {
-        return gson.toJson(gameList.get(index));
+        if (index >= gameList.size() || index < 0) {
+            return null;
+        } else {
+            return gson.toJson(gameList.get(index));
+        }
     }
 
     @Override
     public String getJsonAllItems() {
         String result = "[\n";
         for (int i = 0; i < gameList.size(); i++) {
-            result += gson.toJson(gameList.get(i)) + ",\n";
+            result += (i != gameList.size()-1) ?
+                    gson.toJson(gameList.get(i)) + ",\n" :
+                    gson.toJson(gameList.get(i)) + "\n]";
         }
-        result += "]";
         return result;
     }
 }
