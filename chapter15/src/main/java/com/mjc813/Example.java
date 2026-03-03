@@ -35,9 +35,9 @@ public class Example {
     }
 
     public void linkedListExample() {
-        List<String> list1 = new ArrayList<String>();
+        List<String> list1 = new ArrayList<>();
 
-        List<String> list2 = new LinkedList<String>();
+        List<String> list2 = new LinkedList<>();
 
         long startTime;
         long endTime;
@@ -124,5 +124,265 @@ public class Example {
             System.out.println(k + " : " + v);
         }
         System.out.println();
+    }
+
+    public void hashTableExample() {
+        Map<String, Integer> map = new Hashtable<>();
+
+        Thread threadA = new Thread() {
+            @Override
+            public void run() {
+                for (int i = 1; i <= 1000; i++) {
+                    map.put(String.valueOf(i), i);
+                }
+            }
+        };
+
+        Thread threadB = new Thread() {
+            @Override
+            public void run() {
+                for (int i = 1001; i <= 2000; i++) {
+                    map.put(String.valueOf(i), i);
+                }
+            }
+        };
+
+        threadA.start();
+        threadB.start();
+
+        try {
+            threadA.join();
+            threadB.join();
+        } catch (Exception e) {}
+
+        int size = map.size();
+        System.out.println("총 엔트리 수: " + size);
+        System.out.println();
+    }
+
+    public void propertiesExample() throws Exception {
+        Properties properties = new Properties();
+
+        properties.load(Example.class.getResourceAsStream("database.properties"));
+
+        String driver = properties.getProperty("driver");
+        String url = properties.getProperty("url");
+        String username = properties.getProperty("username");
+        String password = properties.getProperty("password");
+        String admin = properties.getProperty("admin");
+
+        System.out.println("driver : " + driver);
+        System.out.println("url : " + url);
+        System.out.println("username : " + username);
+        System.out.println("password : " + password);
+        System.out.println("admin : " + admin);
+    }
+
+    public void treeSetExample() {
+        TreeSet<Integer> scores = new TreeSet<>();
+
+        scores.add(87);
+        scores.add(98);
+        scores.add(75);
+        scores.add(95);
+        scores.add(80);
+
+        for (Integer s : scores) {
+            System.out.print(s + " ");
+        }
+        System.out.println("\n");
+
+        System.out.println("가장 낮은 점수: " + scores.first());
+        System.out.println("가장 높은 점수: " + scores.last());
+        System.out.println("95점 아래 점수: " + scores.lower(95));
+        System.out.println("95점 위의 점수: " + scores.higher(95));
+        System.out.println("95점이거나 바로 아래 점수: " + scores.floor(95));
+        System.out.println("85점이거나 바로 위의 점수: " + scores.ceiling(85) + "\n");
+
+        NavigableSet<Integer> descendingScores = scores.descendingSet();
+        for (Integer s : descendingScores) {
+            System.out.print(s + " ");
+        }
+        System.out.println("\n");
+
+        NavigableSet<Integer> rangeSet = scores.tailSet(80, true);
+        for (Integer s : rangeSet) {
+            System.out.print(s + " ");
+        }
+        System.out.println("\n");
+
+        rangeSet = scores.subSet(80, true, 90, false);
+        for (Integer s : rangeSet) {
+            System.out.print(s + " ");
+        }
+        System.out.println();
+    }
+
+    public void treeMapExample() {
+        TreeMap<String,Integer> treeMap = new TreeMap<>();
+
+        treeMap.put("apple", 10);
+        treeMap.put("forever", 60);
+        treeMap.put("description", 40);
+        treeMap.put("ever", 50);
+        treeMap.put("zoo", 80);
+        treeMap.put("base", 20);
+        treeMap.put("guess", 70);
+        treeMap.put("cherry", 30);
+
+        Set<Map.Entry<String,Integer>> entrySet = treeMap.entrySet();
+        for (Map.Entry<String,Integer> entry : entrySet) {
+            System.out.println(entry.getKey() + "-" + entry.getValue());
+        }
+        System.out.println();
+
+        Map.Entry<String,Integer> entry = null;
+        entry = treeMap.firstEntry();
+        System.out.println("제일 앞 단어: " + entry.getKey() + "-" + entry.getValue());
+        entry = treeMap.lastEntry();
+        System.out.println("제일 뒤 단어: " + entry.getKey() + "-" + entry.getValue());
+        entry = treeMap.lowerEntry("ever");
+        System.out.println("ever 앞 단어: " + entry.getKey() + "-" + entry.getValue());
+
+        NavigableMap<String,Integer> descendingMap = treeMap.descendingMap();
+        Set<Map.Entry<String,Integer>> descendingEntrySet = descendingMap.entrySet();
+        for (Map.Entry<String,Integer> e : descendingEntrySet) {
+            System.out.println(e.getKey() + "-" + e.getValue());
+        }
+        System.out.println();
+
+        System.out.println("[c~h 사이의 단어 검색]");
+        NavigableMap<String,Integer> rangeMap = treeMap.subMap("c", true, "h", false);
+        for (Map.Entry<String,Integer> e : rangeMap.entrySet()) {
+            System.out.println(e.getKey() + "-" + e.getValue());
+        }
+    }
+
+    public void comparableExample() {
+        TreeSet<Person> treeSet = new TreeSet<Person>();
+
+        treeSet.add(new Person("홍길동", 45));
+        treeSet.add(new Person("김자바", 25));
+        treeSet.add(new Person("박지원", 31));
+
+        for (Person person : treeSet) {
+            System.out.println(person.getName() + ":" + person.getAge());
+        }
+    }
+
+    public void comparatorExample() {
+        TreeSet<Fruit> treeSet = new TreeSet<Fruit>(new FruitComparator());
+
+        treeSet.add(new Fruit("포도", 3000));
+        treeSet.add(new Fruit("수박", 10000));
+        treeSet.add(new Fruit("딸기", 6000));
+
+        for (Fruit fruit : treeSet) {
+            System.out.println(fruit.getName() + ":" + fruit.getPrice());
+        }
+    }
+
+    public void stackExample() {
+        Stack<Coin> coinBox = new Stack<Coin>();
+
+        coinBox.push(new Coin(100));
+        coinBox.push(new Coin(50));
+        coinBox.push(new Coin(500));
+        coinBox.push(new Coin(10));
+
+        while(!coinBox.isEmpty()) {
+            Coin coin = coinBox.pop();
+            System.out.println("꺼내온 동전: " + coin.getValue() + "원");
+        }
+    }
+
+    public void queueExample() {
+        Queue<Message> messageQueue = new LinkedList<>();
+
+        messageQueue.offer(new Message("sendMail", "홍길동"));
+        messageQueue.offer(new Message("sendSMS", "신용권"));
+        messageQueue.offer(new Message("sendKakaoTalk", "김자바"));
+
+        while(!messageQueue.isEmpty()) {
+            Message message = messageQueue.poll();
+            switch(message.getCommand()) {
+                case "sendMail" :
+                    System.out.println(message.getTo() + "님에게 메일을 보냅니다.");
+                    break;
+                case "sendSMS" :
+                    System.out.println(message.getTo() + "님에게 SMS를 보냅니다.");
+                    break;
+                case "sendKakaoTalk" :
+                    System.out.println(message.getTo() + "님에게 카톡을 보냅니다.");
+                    break;
+            }
+        }
+    }
+
+    public void synchronizedMapExample() {
+        Map<Integer,String> map = Collections.synchronizedMap(new HashMap<>());
+
+        Thread threadA = new Thread() {
+            @Override
+            public void run() {
+                for (int i = 1; i<=1000; i++) {
+                    map.put(i, "내용"+i);
+                }
+            }
+        };
+
+        Thread threadB = new Thread() {
+            @Override
+            public void run() {
+                for (int i = 1001; i<=2000; i++) {
+                    map.put(i, "내용"+i);
+                }
+            }
+        };
+
+        threadA.start();
+        threadB.start();
+
+        try {
+            threadA.join();
+            threadB.join();
+        } catch (Exception e) {}
+
+        int size = map.size();
+        System.out.println("총 객체 수: " + size);
+        System.out.println();
+    }
+
+    public void immutableExample() {
+        List<String> immutableList1 = List.of("A", "B", "C");
+
+        Set<String> immutableSet1 = Set.of("A", "B", "C");
+
+        Map<Integer,String> immutableMap1 = Map.of(
+                1, "A",
+                2, "B",
+                3, "C"
+        );
+
+        List<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        List<String> immutableList2 = List.copyOf(list);
+
+        Set<String> set = new HashSet<>();
+        set.add("A");
+        set.add("B");
+        set.add("C");
+        Set<String> immutableSet2 = Set.copyOf(set);
+
+        Map<Integer,String> map = new HashMap<>();
+        map.put(1, "A");
+        map.put(2, "B");
+        map.put(3, "C");
+        Map<Integer,String> immutableMap2 = Map.copyOf(map);
+
+        String[] arr = { "A", "B", "C" };
+        List<String> immutableList3 = Arrays.asList(arr);
     }
 }
