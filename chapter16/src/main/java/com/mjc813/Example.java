@@ -10,11 +10,9 @@ public class Example {
         check1.procString("구현 클래스", 6);
         check2.procString("구현 클래스", 6);
 
-        check((str, num) -> System.out.println(str + "의 길이가 " + num + "와 일치 여부: " + (str.length()==num)));
-        check((str, num) -> System.out.println(str.repeat(num)));
-    }
+        LamdaUseInterface lu = new LamdaUseInterface();
 
-    public void check(Check check) {
-        check.procString("이름 없는 람다식", 9);
+        lu.doSome((str, num) -> System.out.println((str.length() == num) ? "같다" : "다르다"), "테스트", 3);
+        lu.doSome((str, num) -> System.out.println(str.repeat(num)), "테스트", 3);
     }
 }
