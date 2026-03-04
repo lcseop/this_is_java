@@ -385,4 +385,12 @@ public class Example {
         String[] arr = { "A", "B", "C" };
         List<String> immutableList3 = Arrays.asList(arr);
     }
+
+    public void exam07() {
+        BoardDao dao = new BoardDao();
+        List<BoardE> list = dao.getBoardList();
+        for (BoardE board : list) {
+            System.out.println(board.getTitle() + "-" + board.getContent());
+        }
+    }
 }
