@@ -393,4 +393,44 @@ public class Example {
             System.out.println(board.getTitle() + "-" + board.getContent());
         }
     }
+
+    public void exam08() {
+        Set<Student> set = new HashSet<>();
+
+        set.add(new Student(1, "홍길동"));
+        set.add(new Student(2, "신용권"));
+        set.add(new Student(1, "조민우"));
+
+        System.out.println("저장된 객체 수: " + set.size());
+        for (Student s : set) {
+            System.out.println(s.getStudentNum() + ":" + s.getName());
+        }
+    }
+
+    public void exam09() {
+        Map<String,Integer> map = new HashMap<>();
+        map.put("blue", 96);
+        map.put("hong", 86);
+        map.put("white", 92);
+
+        String name = null;
+        int maxScore = 0;
+        int totalScore = 0;
+
+        Set<String> set = map.keySet();
+        Iterator<String> iterator = set.iterator();
+        while (iterator.hasNext()) {
+            String s = iterator.next();
+            Integer i = map.get(s);
+            if (maxScore < i) {
+                maxScore = i;
+                name = s;
+            }
+            totalScore += i;
+        }
+        System.out.println("평균 점수: " + totalScore/map.size());
+        System.out.println("최고 점수: " + maxScore);
+        System.out.println("최고 점수를 받은 아이디: " + name);
+
+    }
 }

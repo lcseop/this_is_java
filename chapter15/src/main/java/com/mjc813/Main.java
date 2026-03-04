@@ -34,5 +34,9 @@ public class Main {
         exam.synchronizedMapExample();
         System.out.println("-------------------- p687 수정할 수 없는 컬렉션");
         exam.immutableExample();
+        System.out.println("-------------------- 확인문제 8번");
+        exam.exam08();
+        System.out.println("-------------------- 확인문제 89번");
+        exam.exam09();
     }
 }
