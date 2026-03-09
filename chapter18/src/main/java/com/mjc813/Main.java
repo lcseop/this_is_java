@@ -36,6 +36,14 @@ public class Main {
         example.printStreamExample();
         System.out.println("--------------- p811 객체 스트림");
         example.objectInputOutputStreamExample();
+        System.out.println("--------------- p817 File 클래스");
+        example.fileExample();
+        System.out.println("--------------- p820 Files 클래스");
+        example.filesExample();
+        System.out.println("--------------- 확인문제 7번");
+        example.exam07();
+        System.out.println("--------------- 확인문제 10번");
+        example.exam10();
     }
 
     public static void SmapleOutputStream() {

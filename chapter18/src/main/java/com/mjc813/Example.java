@@ -2,9 +2,11 @@ package com.mjc813;
 
 import javax.xml.crypto.Data;
 import java.io.*;
-import java.nio.Buffer;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.nio.*;
+import java.nio.charset.*;
+import java.nio.file.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Example {
     public void writeExample() {
@@ -423,6 +425,133 @@ public class Example {
             try {
                 fos.close();
             } catch (Exception e) {}
+        }
+    }
+
+    public void fileExample() {
+        try {
+            File dir = new File("Temp/images");
+            File file1 = new File("Temp/file1.txt");
+            File file2 = new File("Temp/file2.txt");
+            File file3 = new File("Temp/file3.txt");
+            if (dir.exists() == false) {dir.mkdirs();}
+            if (file1.exists() == false) {file1.createNewFile();}
+            if (file2.exists() == false) {file2.createNewFile();}
+            if (file3.exists() == false) {file3.createNewFile();}
+
+            File temp = new File("Temp");
+            File[] contents = temp.listFiles();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd a HH:mm");
+            for (File file : contents) {
+                System.out.printf("%-25s", sdf.format(new Date(file.lastModified())));
+                if (file.isDirectory()) {
+                    System.out.printf("%-10s%-20s", "<DIR>", file.getName());
+                } else {
+                    System.out.printf("%-10s%-20s", file.length(), file.getName());
+                }
+                System.out.println();
+            }
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+    }
+
+    public void filesExample() {
+        try {
+            String data = "" +
+                    "id: winter\n" +
+                    "email: winter@mycompany.com\n" +
+                    "tel: 010-123-1234";
+
+            Path path = Paths.get("Temp/user.txt");
+
+            Files.writeString(Paths.get("Temp/user.txt"), data, Charset.forName("UTF-8"));
+
+            System.out.println("파일 유형: " + Files.probeContentType(path));
+            System.out.println("파일 크기: " + Files.size(path) + " bytes");
+
+            String content = Files.readString(path, Charset.forName("UTF-8"));
+            System.out.println(content);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    public void exam07() {
+        String filePath = "src/main/java/com/mjc813/Main.java";
+
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader(filePath);
+            br = new BufferedReader(fr);
+
+            int rowNumber = 0;
+            String rowData = null;
+
+            while (true) {
+                if ((rowData = br.readLine()) == null) break;
+                System.out.println(++rowNumber + ": " + rowData);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            try {
+                br.close();
+            } catch (Exception e) {}
+            try {
+                fr.close();
+            } catch (Exception e) {}
+        }
+    }
+
+    public void exam10() {
+        String originalPath = "Temp/dir1/photo1.jpg";
+        String targetPath = "Temp/dir2/photo2.jpg";
+
+        InputStream is = null;
+        OutputStream os = null;
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
+
+        System.out.println("원본 파일 경로: " + originalPath);
+        System.out.println("복사 파일 경로: " + targetPath);
+        File fi = new File("Temp/dir1/photo1.jpg");
+        if (fi.exists()) {
+            try {
+                is = new FileInputStream(originalPath);
+                os = new FileOutputStream(targetPath);
+                bis = new BufferedInputStream(is);
+                bos = new BufferedOutputStream(os);
+
+                bis.transferTo(bos);
+                System.out.println("파일 복사 성공");
+
+            } catch (Exception e) {
+                System.err.println(e);
+            } finally {
+                try {
+                    bis.close();
+                } catch (Exception e) {
+                }
+                try {
+                    bos.close();
+                } catch (Exception e) {
+                }
+                try {
+                    os.close();
+                } catch (Exception e) {
+                }
+                try {
+                    is.close();
+                } catch (Exception e) {
+                }
+            }
+        } else {
+            System.out.println("원본 파일이 존재하지 않습니다.");
         }
     }
 }
