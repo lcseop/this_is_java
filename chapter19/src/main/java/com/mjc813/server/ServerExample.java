@@ -34,7 +34,7 @@ public class ServerExample {
             public void run() {
                 try {
                     serverSocket = new ServerSocket();
-                    serverSocket.bind(new InetSocketAddress("10.11.83.69", 50001));
+                    serverSocket.bind(new InetSocketAddress(50001));
                     System.out.println("[서버] 시작됨");
 
                     while (true) {
