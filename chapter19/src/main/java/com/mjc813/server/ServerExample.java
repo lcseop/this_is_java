@@ -1,5 +1,6 @@
 package com.mjc813.server;
 
+import java.io.*;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -30,24 +31,38 @@ public class ServerExample {
 
     public void startServer() {
         Thread thread = new Thread(() -> {
+            Socket socket = null;
+            BufferedReader breader = null;
+            InetSocketAddress isa = null;
             try {
-                serverSocket = new ServerSocket();
-                serverSocket.bind(new InetSocketAddress(50001));
-                System.out.println("[서버] 시작됨");
-
-                while (true) {
+                serverSocket = new ServerSocket(50001);
+            } catch (Exception e) {}
+            System.out.println("[서버] 시작됨");
+            while (true) {
+                try {
                     System.out.println("\n[서버] 연결 요청을 기다림\n");
-                    Socket socket = serverSocket.accept();
-
-                    InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress();
+                    socket = serverSocket.accept();
+                    isa = (InetSocketAddress) socket.getRemoteSocketAddress();
                     System.out.println("[서버] " + isa.getHostString() + "의 연결 요청을 수락함");
-
+                    breader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    String msg = breader.readLine();
+                    System.out.println(msg);
                     socket.close();
                     System.out.println("[서버] " + isa.getHostString() + "의 연결을 끊음");
+                } catch (IOException e) {
+                    System.err.println("[서버] " + e.getMessage());
+                } finally {
+                    try {
+                        breader.close();
+                    } catch (Exception e) {}
+                    try {
+                        socket.close();
+                    } catch (Exception e) {}
+                    System.out.println("[서버] " + isa.getHostString() + "의 연결을 끊음");
                 }
-            } catch (IOException e) {
-                System.err.println("[서버] " + e.getMessage());
+
             }
+
         });
 
         thread.start();
