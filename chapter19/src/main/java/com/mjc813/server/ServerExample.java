@@ -29,29 +29,26 @@ public class ServerExample {
     }
 
     public void startServer() {
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    serverSocket = new ServerSocket();
-                    serverSocket.bind(new InetSocketAddress(50001));
-                    System.out.println("[서버] 시작됨");
+        Thread thread = new Thread(() -> {
+            try {
+                serverSocket = new ServerSocket();
+                serverSocket.bind(new InetSocketAddress(50001));
+                System.out.println("[서버] 시작됨");
 
-                    while (true) {
-                        System.out.println("\n[서버] 연결 요청을 기다림\n");
-                        Socket socket = serverSocket.accept();
+                while (true) {
+                    System.out.println("\n[서버] 연결 요청을 기다림\n");
+                    Socket socket = serverSocket.accept();
 
-                        InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress();
-                        System.out.println("[서버] " + isa.getHostString() + "의 연결 요청을 수락함");
+                    InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress();
+                    System.out.println("[서버] " + isa.getHostString() + "의 연결 요청을 수락함");
 
-                        socket.close();
-                        System.out.println("[서버] " + isa.getHostString() + "의 연결을 끊음");
-                    }
-                } catch (IOException e) {
-                    System.err.println("[서버] " + e.getMessage());
+                    socket.close();
+                    System.out.println("[서버] " + isa.getHostString() + "의 연결을 끊음");
                 }
+            } catch (IOException e) {
+                System.err.println("[서버] " + e.getMessage());
             }
-        };
+        });
 
         thread.start();
     }
