@@ -50,10 +50,6 @@ public class ServerApp {
 				String msg = sa.dis.readUTF();
 				System.out.println(msg);
 				// 클라이언트통신 소켓으로부터 데이터를 읽어서 출력했다.
-
-				socket.close();
-				// 클라이언트통신 소켓을 닫았다.
-				System.out.println("연결 종료");
 			}
 		} catch (Exception e) {
 			System.err.println(e.toString());

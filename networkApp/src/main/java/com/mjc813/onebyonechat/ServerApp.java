@@ -37,16 +37,16 @@ public class ServerApp {
 			sa = new ServerApp();
 			while (true) {
 				Socket socket = sa.accept();
-				// 클라이언트가 연결되면 socket (새로운 클라이언트통신 소켓) 으로 통신이 가능하다.
-
-				sa.dis = new DataInputStream(socket.getInputStream());
-				String msg = sa.dis.readUTF();
-				System.out.println(msg);
-				// 클라이언트통신 소켓으로부터 데이터를 읽어서 출력했다.
-
-				socket.close();
-				// 클라이언트통신 소켓을 닫았다.
-				System.out.println("연결 종료");
+				System.out.println(socket.getInetAddress().getHostAddress() + " 접속 중");
+				try {
+					sa.dis = new DataInputStream(socket.getInputStream());
+					while (true) {
+						String msg = sa.dis.readUTF();
+						System.out.println(msg);
+					}
+				} catch (Exception e) {
+					System.out.println("------------ 접속이 종료되었습니다.");
+				}
 			}
 		} catch (Exception e) {
 			System.err.println(e.toString());

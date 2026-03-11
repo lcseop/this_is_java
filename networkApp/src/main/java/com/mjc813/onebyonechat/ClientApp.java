@@ -57,7 +57,13 @@ public class ClientApp {
 			Scanner s = new Scanner(System.in);
 			ca.connect();
 
-			ca.send(ca.getSocket().getInetAddress().getHostAddress() + ": " + s.nextLine());
+			while (true) {
+				String msg = s.nextLine();
+				if (msg.equals("quit")) {
+					break;
+				}
+				ca.send(ca.getSocket().getInetAddress().getHostAddress() + ": " + msg);
+			}
 			s.close();
 			ca.close();
 		} catch (Exception ex) {
