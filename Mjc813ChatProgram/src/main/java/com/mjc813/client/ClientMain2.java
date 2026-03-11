@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 import static com.mjc813.server.ServerMain.exitWord;
 
-public class ClientMain extends Thread {
+public class ClientMain2 extends Thread {
     // ChatUser는 서버 접속 후에 닉네임을 전송해야 한다.
     // InputStream이 블로킹 상태이므로 스레드가 필요하다.
     private Socket socket;
     private BufferedReader br;
     private BufferedWriter bw;
 
-    public ClientMain(String ip) {
+    public ClientMain2(String ip) {
         try {
             this.socket = new Socket(ip, ServerMain.PORT);
             this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
