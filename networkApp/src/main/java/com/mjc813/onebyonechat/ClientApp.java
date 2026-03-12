@@ -22,7 +22,7 @@ public class ClientApp {
 
 	public void connect() throws IOException {
 //		this.socket.bind(new InetSocketAddress("localhost", 59999)); // ip 와 포트 정보를 bind 하고 접속 시도한다.
-		this.socket.connect(new InetSocketAddress("localhost", 59999));
+		this.socket.connect(new InetSocketAddress("localhost", 59990));
 		// 해당 ip 와 포트로 접속을 시도한다.
 	}
 

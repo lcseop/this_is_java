@@ -17,7 +17,7 @@ public class ServerApp {
 	private DataOutputStream dos;
 
 	public ServerApp() throws IOException {
-		this.serverSocket = new ServerSocket(59999);
+		this.serverSocket = new ServerSocket(59990);
 		// 포트번호로 서버소켓을 생성한다.
 	}
 
@@ -47,7 +47,8 @@ public class ServerApp {
 				} catch (Exception e) {
 					System.out.println("------------ 접속이 종료되었습니다.");
 				}
-			}
+				sa.dis.close();
+            }
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		} finally {
