@@ -1,6 +1,7 @@
 package com.mjc813;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Example {
@@ -50,6 +51,41 @@ public class Example {
         rc.start();
         while (true) {
             rc.setWord(s.nextLine());
+        }
+    }
+
+    public void report05() {
+        Scanner s = new Scanner(System.in);
+        System.out.print("정수 리스트를 입력하세요. -> ");
+        String[] array = s.nextLine().split(",");
+        System.out.println(Arrays.toString(array));
+        Integer[] arrayInt = new Integer[array.length];
+        for (int i = 0; i< array.length; i++) {
+            try {
+                arrayInt[i] = Integer.parseInt(array[i].replace(" ", ""));
+            } catch (Exception e) {}
+        }
+        Report5 rcSum = new Report5("sum", arrayInt);
+        Report5 rcAvg = new Report5("avg", arrayInt);
+        Report5 rcSort = new Report5("sort", arrayInt);
+        Report5 rcOdd = new Report5("odd", arrayInt);
+        Report5 rcEven = new Report5("even", arrayInt);
+
+        rcSum.start();
+        rcAvg.start();
+        rcSort.start();
+        rcOdd.start();
+        rcEven.start();
+    }
+
+    public void report06() {
+        Scanner s = new Scanner(System.in);
+        System.out.print("출력할 구구단을 입력하세요 -> ");
+        Report6 rc = new Report6(s.nextInt());
+        rc.start();
+        while(true) {
+            rc = new Report6(s.nextInt());
+            rc.start();
         }
     }
 
@@ -176,6 +212,28 @@ public class Example {
 
         threadA.start();
         threadB.start();
+    }
+
+    public void safeStopExample() {
+        PrintThread printThread = new PrintThread();
+        printThread.start();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {}
+
+        printThread.setStop(true);
+    }
+
+    public void interruptExample() {
+        Thread thread = new PrintThread2();
+        thread.start();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {}
+
+        thread.interrupt();
     }
 
 }

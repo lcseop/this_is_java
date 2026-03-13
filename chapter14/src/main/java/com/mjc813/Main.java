@@ -25,9 +25,13 @@ public class Main {
         // 개인과제3
 //        example.report03();
         // 개인과제4
-        example.report04();
+//        example.report04();
+        // 개인과제5
+//        example.report05();
+        // 개인과제6
+        example.report06();
 
-//        example.waitNotifyExample();
+//        example.interruptExample();
 
 
     }
