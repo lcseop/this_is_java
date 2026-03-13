@@ -3,6 +3,10 @@ package com.mjc813;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Example {
     public void report01() {
@@ -234,6 +238,79 @@ public class Example {
         } catch (InterruptedException e) {}
 
         thread.interrupt();
+    }
+
+    public void daemonExample() {
+        AutoSaveThread autoSaveThread = new AutoSaveThread();
+        autoSaveThread.setDaemon(true);
+        autoSaveThread.start();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {}
+
+        System.out.println("메인 스레드 종료");
+    }
+
+    public void executorServiceExample() {
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        executorService.shutdownNow();
+    }
+
+    public void runnableExecuteExample() {
+        String[][] mails = new String[1000][3];
+        for (int i = 0; i < mails.length; i++) {
+            mails[i][0] = "admin@my.com";
+            mails[i][1] = "member" + i + "@my.com";
+            mails[i][2] = "신상품 입고";
+        }
+
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+
+        for (int i = 0; i < 1000; i++) {
+            final int idx = i;
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    Thread thread = Thread.currentThread();
+                    String from = mails[idx][0];
+                    String to = mails[idx][1];
+                    String content = mails[idx][2];
+                    System.out.printf("[%s] %s ==> %s: %s\n", thread.getName(), from, to, content);
+                }
+            });
+        }
+
+        executorService.close();
+    }
+
+    public void callableSubmitExample() {
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+
+        for (int i = 1; i <= 100; i++) {
+            final int idx = i;
+            Future<Integer> future = executorService.submit(new Callable<Integer>() {
+                @Override
+                public Integer call() throws Exception {
+                    int sum = 0;
+                    for (int i = 1; i <= idx; i++) {
+                        sum += i;
+                    }
+                    Thread thread = Thread.currentThread();
+                    System.out.printf("[%s] 1~%d 합 계산", thread.getName(), idx);
+                    return sum;
+                }
+            });
+
+            try {
+                int result = future.get();
+                System.out.println("\t리턴값: " + result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        executorService.shutdown();
     }
 
 }

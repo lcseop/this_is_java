@@ -29,9 +29,9 @@ public class Main {
         // 개인과제5
 //        example.report05();
         // 개인과제6
-        example.report06();
+//        example.report06();
 
-//        example.interruptExample();
+        example.callableSubmitExample();
 
 
     }
