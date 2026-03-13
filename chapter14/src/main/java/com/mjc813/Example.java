@@ -1,8 +1,58 @@
 package com.mjc813;
 
 import java.awt.*;
+import java.util.Scanner;
 
 public class Example {
+    public void report01() {
+        try {
+            for (int i = 2; i <= 9; i++) {
+                for (int j = 1; j <= 9; j++) {
+                    System.out.printf("%d * %d = %d\n", i, j, i*j);
+                    Thread.sleep(100);
+                }
+            }
+        } catch (InterruptedException e) {}
+    }
+
+    public void report02() {
+        Report2Class rc = new Report2Class();
+        rc.start();
+        try {
+            for (int i = 2; i <= 4; i++) {
+                for (int j = 1; j <= 9; j++) {
+                    System.out.printf("%d * %d = %d\n", i, j, i*j);
+                    Thread.sleep(50);
+                }
+            }
+        } catch (InterruptedException e) {}
+    }
+
+    public void report03() {
+        Thread rc1 = new Thread(new Report3Class1());
+        Report3Class2 rc2 = new Report3Class2();
+        rc1.start();
+        rc2.start();
+        try {
+            for (int i = 2; i <= 3; i++) {
+                for (int j = 1; j <= 9; j++) {
+                    System.out.printf("%d * %d = %d\n", i, j, i*j);
+                    Thread.sleep(50);
+                }
+            }
+        } catch (InterruptedException e) {}
+    }
+
+    public void report04() {
+        Scanner s = new Scanner(System.in);
+        System.out.print("무한반복할 글자를 입력하세요 -> ");
+        Report4Class rc = new Report4Class(s.nextLine());
+        rc.start();
+        while (true) {
+            rc.setWord(s.nextLine());
+        }
+    }
+
     public void beepPrintExample() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         for (int i = 0; i < 5; i++) {

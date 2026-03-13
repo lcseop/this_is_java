@@ -15,8 +15,20 @@ public class Main {
 //        // 스레드 실행
 //        th3.close();
 
+
         Example example = new Example();
 
-        example.waitNotifyExample();
+        // 개인과제1
+//        example.report01();
+        // 개인과제2
+//        example.report02();
+        // 개인과제3
+//        example.report03();
+        // 개인과제4
+        example.report04();
+
+//        example.waitNotifyExample();
+
+
     }
 }
