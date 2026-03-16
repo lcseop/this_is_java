@@ -45,9 +45,6 @@ public class Report5 extends Thread {
             case "odd" :
                 msg.append("숫자들 중 홀수 값들 : ");
                 for (int i = 0; i < this.arrays.length; i++) {
-
-                }
-                for (int i = 0; i < this.arrays.length; i++) {
                     if (this.arrays[i] % 2 == 1) {
                         msg.append((first) ? ", " : "").append(this.arrays[i]);
                         first = true;

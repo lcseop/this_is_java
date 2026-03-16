@@ -62,7 +62,6 @@ public class Example {
         Scanner s = new Scanner(System.in);
         System.out.print("정수 리스트를 입력하세요. -> ");
         String[] array = s.nextLine().split(",");
-        System.out.println(Arrays.toString(array));
         Integer[] arrayInt = new Integer[array.length];
         for (int i = 0; i< array.length; i++) {
             try {
