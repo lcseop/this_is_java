@@ -6,10 +6,8 @@ public class Report6 extends Thread {
     public Report6(int gugudan) {
         if (gugudan < 1) {
             this.gugudan = 1;
-        } else if (gugudan > 9) {
-            this.gugudan = 9;
         } else {
-            this.gugudan = gugudan;
+            this.gugudan = Math.min(gugudan, 9);
         }
     }
 
