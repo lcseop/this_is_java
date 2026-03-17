@@ -7,7 +7,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientApp {
+public class ClientApp extends Thread {
 	private Socket socket;
 	private DataInputStream dis;
 	private DataOutputStream dos;
@@ -51,27 +51,51 @@ public class ClientApp {
 		}
 	}
 
-	public static void main(String[] args) {
+	@Override
+	public void run() {
 		try {
-			ClientApp ca = new ClientApp();
+			while (true) {
+				String msg = this.read();
+				if (msg.equals(ServerApp.exitWord)) {
+					System.out.println("서버로부터 접속이 종료되었습니다.");
+					this.close();
+				}
+				System.out.println("SERVER: " + msg);
+			}
+		} catch (Exception e) {
+            try {
+                this.close();
+            } catch (IOException ex) {}
+        }
+
+	}
+
+	public static void main(String[] args) {
+		ClientApp ca = null;
+		try {
+			ca = new ClientApp();
 			Scanner s = new Scanner(System.in);
 			ca.connect();
 
+			ca.start();
 			while (true) {
 				String msg = s.nextLine();
 				if (msg.equals("quit")) {
+					ca.send(ServerApp.exitWord);
 					break;
 				}
 				ca.send(ca.getSocket().getInetAddress().getHostAddress() + ": " + msg);
 
-				msg = ca.read();
-				System.out.println("SERVER: " + msg);
-
 			}
 			s.close();
-			ca.close();
+
 		} catch (Exception ex) {
 			System.err.println(ex.toString());
+		} finally {
+			try {
+				ca.close();
+			} catch (Exception e) {}
+			System.exit(-999);
 		}
 	}
 }

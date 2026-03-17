@@ -16,6 +16,7 @@ public class ServerApp {
 	private ServerSocket serverSocket;
 	private DataInputStream dis;
 	private DataOutputStream dos;
+	public static final String exitWord = "!test@@@";
 
 	public ServerApp() throws IOException {
 		this.serverSocket = new ServerSocket(59990);
@@ -34,29 +35,40 @@ public class ServerApp {
 
 	public static void main(String[] args) {
 		ServerApp sa = null;
+		Socket socket = null;
 		Scanner scanner = null;
 		ServerCommunicateSocket scs = null;
-		try {
-			scanner = new Scanner(System.in);
-			sa = new ServerApp();
-			Socket socket = sa.accept();
-			scs = new ServerCommunicateSocket(socket);
+		while (true) {
 
-			while (true) {
-				String msg = scs.read();
-				System.out.println(msg);
+			try {
+				scanner = new Scanner(System.in);
+				sa = new ServerApp();
+				socket = sa.accept();
+				System.out.println("연결됨");
+				scs = new ServerCommunicateSocket(socket);
 
-				scs.send(scanner.nextLine());
-            }
+				scs.start();
+				while (true) {
+					scs.send(scanner.nextLine());
+					if (!scs.isActive()) {
+						break;
+					}
+				}
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		} finally {
+			scs.send(ServerApp.exitWord);
 			try {
 				scs.close();
+			} catch (Exception e) {}
+			try {
+				socket.close();
 			} catch (Exception e) {}
 			try {
 				sa.close();
 			} catch (Exception e) {}
 		}
+		}
+
 	}
 }
