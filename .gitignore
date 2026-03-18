@@ -57,3 +57,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# MySQL Data
+.tmp
+.sdi
+.pem
