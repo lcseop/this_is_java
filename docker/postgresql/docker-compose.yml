@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:15  # 최신 안정화 버전인 15 또는 16 추천
+    container_name: postgres_db
+    ports:
+      - "5432:5432"  # 만약 로컬에 설치된 포그레가 있다면 "5433:5432"로 변경
+    environment:
+      TZ: Asia/Seoul
+      POSTGRES_USER: root          # 사용자 이름
+      POSTGRES_PASSWORD: 1234      # 비밀번호
+      POSTGRES_DB: testdb          # 기본 생성될 데이터베이스 이름
+    volumes:
+      - ./pgdata/data:/var/lib/postgresql/data  # 데이터 저장소
+      - ./pgdata/initdb.d:/docker-entrypoint-initdb.d # 초기 SQL 실행용
+    restart: always

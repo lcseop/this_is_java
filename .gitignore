@@ -58,7 +58,7 @@ build/
 ### Mac OS ###
 .DS_Store
 
-# MySQL Data
-.tmp
-.sdi
-.pem
+### DBfolder ###
+docker/mariadb/db
+docker/mysql8/mysql-data
+docker/postgresql/pgdata
