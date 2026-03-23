@@ -173,9 +173,29 @@ class NintendoGame {
 
     if (this.checkGame("add")) {
       this.#gameList.push(setGame);
+      this.insertData(setGame);
       this.printList();
       this.clearInputData();
     }
+  }
+
+  insertData(insertData) {
+    // 1. 화면에서는 JSON 데이터를 서버 URL과 Method POST로 전송하는 JQUERY AJAX를 구현해야 한다.
+    // 2. 웹 서버에서는 서버 URL과 Method POST와 JSON 데이터를 받아들이는 컨트롤러를 구현해야 한다.
+    // 3. 웹서버 컨트롤러는 DataBase Service에 insert 하는 동작을 실행해야 한다.
+    // 4. Data Service는 insert 하는 mybatis 메소드를 실행해야 한다.
+    // 5. mybatis insert 메소드는 SQL INSERT 쿼리를 데이터베이스 연결한 Connection Pool에서 실행해야 한다.
+    // 6. 실행할 결과를 역순으로 화면까지 리턴해야 한다.
+    $.ajax({
+      url: "/api/insert-data" // 요청 URL
+      ,type: "POST"           // 전송 방식
+      ,dataType: "json"       // 응답 데이터 타입
+      ,data: JSON.stringify(insertData)
+      ,contentType: "application/json"
+    })
+        .done(function(data, textStatus, jqXHR) {
+          console.log("성공", data);
+        });
   }
 
   editGame() { 
