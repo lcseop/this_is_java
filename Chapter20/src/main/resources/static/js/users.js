@@ -1,7 +1,7 @@
 class users {
     addData() {
         const newUser = {
-            id: $("#userId").val(),
+            userid: $("#userId").val(),
             name: $("#userName").val(),
             password: $("#userPw").val(),
             age: $("#userAge").val(),
