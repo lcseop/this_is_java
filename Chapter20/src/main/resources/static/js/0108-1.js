@@ -194,7 +194,10 @@ class NintendoGame {
       ,contentType: "application/json"
     })
         .done(function(data, textStatus, jqXHR) {
-          console.log("성공", data);
+          alert("성공", data);
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          alert("실패", textStatus);
         });
   }
 
@@ -207,8 +210,30 @@ class NintendoGame {
       targetGame.price = parseInt($("#price").val());
       targetGame.imgUrl = $("#imgUrl").val();
       this.printList();
+      this.updateGame(targetGame);
       this.clearInputData();
     }
+  }
+
+  updateGame(updateData) {
+    if (updateData == null) {
+      return;
+    }
+
+    $.ajax({
+      url: "/api/update-data" // 요청 URL
+      ,type: "PATCH"           // 전송 방식
+      ,dataType: "json"       // 응답 데이터 타입
+      ,data: JSON.stringify(updateData)
+      ,contentType: "application/json"
+    })
+        .done(function(data, textStatus, jqXHR) {
+          alert("성공", data);
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          alert("실패", textStatus);
+        });
+
   }
 
   delGame() {

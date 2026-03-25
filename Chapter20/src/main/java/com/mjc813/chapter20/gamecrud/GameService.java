@@ -11,4 +11,8 @@ public class GameService {
     public void insertData(GameDto newGame) {
         this.gameMybatis.insertData(newGame);
     }
+
+    public void updateData(GameDto newGame) {
+        this.gameMybatis.updateData(newGame);
+    }
 }
