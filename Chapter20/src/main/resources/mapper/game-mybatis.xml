@@ -28,4 +28,9 @@
         WHERE
                 id = #{id}
     </update>
+
+    <delete id="deleteData" parameterType="Integer">
+        DELETE FROM game_tbl
+                WHERE id = #{id}
+    </delete>
 </mapper>

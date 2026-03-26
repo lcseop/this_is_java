@@ -15,4 +15,8 @@ public class GameService {
     public void updateData(GameDto newGame) {
         this.gameMybatis.updateData(newGame);
     }
+
+    public void deleteData(Integer id) {
+        this.gameMybatis.deleteData(id);
+    }
 }

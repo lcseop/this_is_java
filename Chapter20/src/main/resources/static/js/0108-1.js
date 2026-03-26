@@ -241,8 +241,25 @@ class NintendoGame {
       const targetGame = this.#gameList.find(item => this.#selectedId === item.id);
       this.#gameList.splice(this.#gameList.indexOf(targetGame) ,1);
       this.printList();
+      this.deleteGame(targetGame.id);
       this.clearInputData();
     }
+  }
+
+  deleteGame(id) {
+    $.ajax({
+      url: "/api/delete-data"
+      ,type: "DELETE"
+      ,dataType: "json"
+      ,data: JSON.stringify({id : id})
+      ,contentType: "application/json"
+    })
+        .done(function(data, textStatus, jqXHR) {
+          alert("성공", data);
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          alert("실패", textStatus);
+        });
   }
 
   imgChange() {
