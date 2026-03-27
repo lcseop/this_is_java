@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class GameRestController {
     // 서비스를 멤버변수로 등록함
@@ -57,6 +59,19 @@ public class GameRestController {
             System.out.println("getData: " + id);
             GameDto find = this.gameService.findById(id);
             return ResponseEntity.ok().body(new CommonResponse(0, "ok", find));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CommonResponse(-999, "Server Error", null));
+        }
+    }
+
+    @ResponseBody
+    @GetMapping("/api/search-list")
+    public ResponseEntity<CommonResponse> searchList(@ModelAttribute SearchDto searchDto) {
+        try {
+            System.out.println("searchDto: " + searchDto);
+            List<GameDto> list = this.gameService.searchList(searchDto);
+            return ResponseEntity.ok().body(new CommonResponse(0, "ok", list));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CommonResponse(-999, "Server Error"));
