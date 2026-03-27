@@ -1,41 +1,5 @@
 class NintendoGame {
   #gameList = [
-    {
-      id: 1,
-      name: "마리오카트",
-      genre: "C",
-      grade: "ALL",
-      price: 20000,
-      imgUrl:
-        "https://pimg.mk.co.kr/news/cms/202504/06/news-p.v1.20250404.ad221f845db2489a86c2ff50f32c53fa_P1.png",
-    },
-    {
-      id: 2,
-      name: "젤다의전설",
-      genre: "R",
-      grade: "15",
-      price: 20000,
-      imgUrl:
-        "https://i.namu.wiki/i/S66iBPwJwpp_sPdmF1vdHUTmAVawerAHCmH0vps93PCZg986ttafD3tUfT-vUHxlwUa1sy29MDuD5W8Vp6c6EQ.webp",
-    },
-    {
-      id: 3,
-      name: "마리오 원더",
-      genre: "V",
-      grade: "7",
-      price: 69000,
-      imgUrl:
-        "https://i.namu.wiki/i/WkZpZ6b7ueO_hpJW8qkuA0iY4ONOxjBhzr1BM0wKvEa9TaLKKgmWPiibbwPT-lpHh7QgRCnlFwUvZenTnVO2Fw.webp"
-    },
-    {
-      id: 4,
-      name: "수박게임",
-      genre: "A",
-      grade: "12",
-      price: 5000,
-      imgUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQALfRWbpwQj36q0jFM5teH_fNSxiTH03LroQ&s"
-    }
   ];
   #selectedId = -1;
 
@@ -45,6 +9,22 @@ class NintendoGame {
       // 배열을 순환하면서 item 을 class="frame-2" 태그 안의 자식 태그로 추가한다.
       $(".listDataBlock").append(this.printRow(item));
     });
+  }
+
+  findById() {
+    $.ajax({
+      url: "/api/getdata?id=" // 요청 URL
+      ,type: "GET"           // 전송 방식
+      ,dataType: "json"       // 응답 데이터 타입
+      ,data: JSON.stringify(insertData)
+      ,contentType: "application/json"
+    })
+        .done(function(data, textStatus, jqXHR) {
+          alert("성공", data);
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          alert("실패", textStatus);
+        });
   }
 
   printGenre(genre) {
@@ -270,6 +250,7 @@ class NintendoGame {
 $(() => {
   // jquery 실행
   let nint = new NintendoGame();
+  nint.getList();
   nint.printList();
 
   $("#btnAdd").click(function (e) {

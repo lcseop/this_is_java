@@ -33,4 +33,9 @@
         DELETE FROM game_tbl
                 WHERE id = #{id}
     </delete>
+
+    <select id="findById" parameterType="Integer" resultType="GameDto">
+        SELECT FROM id, name, genre, grade, price, img_url
+            WHERE id = #{id}
+    </select>
 </mapper>

@@ -12,4 +12,10 @@ import lombok.Setter;
 public class CommonResponse {
     private Integer code;
     private String name;
+    private Object resultData;
+
+    public CommonResponse (Integer code, String name) {
+        this.code = code;
+        this.name = name;
+    }
 }

@@ -49,4 +49,17 @@ public class GameRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CommonResponse(-999, "Server Error"));
         }
     }
+
+    @ResponseBody
+    @GetMapping("/api/getdata")
+    public ResponseEntity<CommonResponse> getData(@RequestParam("id") Integer id) {
+        try {
+            System.out.println("getData: " + id);
+            GameDto find = this.gameService.findById(id);
+            return ResponseEntity.ok().body(new CommonResponse(0, "ok", find));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CommonResponse(-999, "Server Error"));
+        }
+    }
 }

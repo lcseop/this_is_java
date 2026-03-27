@@ -7,4 +7,5 @@ public interface IGameMybatis {
     void insertData(GameDto newGame);
     void updateData(GameDto gameDto);
     void deleteData(Integer id);
+    GameDto findById(Integer id);
 }
