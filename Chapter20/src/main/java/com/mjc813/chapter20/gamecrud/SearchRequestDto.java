@@ -7,9 +7,14 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class SearchDto {
+public class SearchRequestDto {
     private String searchName;
     private String searchGrade;
     private String searchGenre;
-    private Integer offset;
+    private Integer curPage;
+    private Integer rowsPerPage;
+
+    public void calculate() {
+        this.curPage = (this.curPage - 1) * this.rowsPerPage;
+    }
 }

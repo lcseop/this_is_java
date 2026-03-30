@@ -40,7 +40,22 @@
             WHERE id = #{id}
     </select>
 
-    <select id="searchList" parameterType="SearchDto" resultType="GameDto">
+    <select id="countList" parameterType="SearchRequestDto" resultType="Integer">
+        SELECT count(*)
+        FROM game_tbl
+        WHERE 1 = 1
+        <if test="searchName != ''">
+            AND name LIKE CONCAT('%', #{searchName}, '%')
+        </if>
+        <if test="searchGrade != ''">
+            AND grade =  #{searchGrade}
+        </if>
+        <if test="searchGenre != ''">
+            AND genre =  #{searchGenre}
+        </if>
+    </select>
+
+    <select id="searchList" parameterType="SearchRequestDto" resultType="GameDto">
         SELECT id, name, genre, grade, price, img_url
             FROM game_tbl
             WHERE 1 = 1
@@ -54,6 +69,6 @@
                     AND genre =  #{searchGenre}
                 </if>
             ORDER BY id DESC
-            LIMIT 5 OFFSET #{offset}
+            LIMIT #{rowsPerPage} OFFSET #{curPage}
     </select>
 </mapper>

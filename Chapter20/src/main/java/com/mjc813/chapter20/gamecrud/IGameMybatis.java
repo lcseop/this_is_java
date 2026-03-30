@@ -10,5 +10,6 @@ public interface IGameMybatis {
     void updateData(GameDto gameDto);
     void deleteData(Integer id);
     GameDto findById(Integer id);
-    List<GameDto> searchList(SearchDto searchDto);
+    Integer countList(SearchRequestDto searchRequestDto);
+    List<GameDto> searchList(SearchRequestDto searchRequestDto);
 }

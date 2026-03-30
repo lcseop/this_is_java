@@ -1,7 +1,6 @@
 package com.mjc813.chapter20.gamecrud;
 
 import com.mjc813.chapter20.CommonResponse;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,11 +66,11 @@ public class GameRestController {
 
     @ResponseBody
     @GetMapping("/api/search-list")
-    public ResponseEntity<CommonResponse> searchList(@ModelAttribute SearchDto searchDto) {
+    public ResponseEntity<CommonResponse> searchList(@ModelAttribute SearchRequestDto searchRequestDto) {
         try {
-            System.out.println("searchDto: " + searchDto);
-            List<GameDto> list = this.gameService.searchList(searchDto);
-            return ResponseEntity.ok().body(new CommonResponse(0, "ok", list));
+            System.out.println("searchDto: " + searchRequestDto);
+            SearchResponseDto result = this.gameService.searchList(searchRequestDto);
+            return ResponseEntity.ok().body(new CommonResponse(0, "ok", result));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CommonResponse(-999, "Server Error", null));

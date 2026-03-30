@@ -87,8 +87,8 @@
         <fieldSet id="searchField">
               <div class="searchRow">
                 <legend>검색 (이름, 등급, 장르)</legend>
-                <label for="searchName"></label><input type="text" id="searchName" />
-                <label for="searchGrade"></label>
+                <label for="searchName">제목</label><input type="text" id="searchName" />
+                <label for="searchGrade">등급</label>
                 <select type="text" id="searchGrade">
                   <option value="">전체검색</option>
                   <option value="ALL">전체이용가</option>
@@ -97,7 +97,7 @@
                   <option value="15">15세 이상</option>
                   <option value="18">18세 이상</option>
                 </select>
-                <label for="searchGenre"></label>
+                <label for="searchGenre">장르</label>
                 <select type="text" id="searchGenre">
                   <option value="">전체검색</option>
                   <option value="A">액션</option>
@@ -105,6 +105,13 @@
                   <option value="R">RPG</option>
                   <option value="C">레이싱</option>
                   <option value="V">어드벤쳐</option>
+                </select>
+                <label for="rowsPerPage">표시 행</label>
+                <select type="text" id="rowsPerPage">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
                 </select>
                 <button id="btnSearch">검색</button>
               </div>

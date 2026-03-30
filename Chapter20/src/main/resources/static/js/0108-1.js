@@ -16,19 +16,25 @@ class NintendoGame {
       "searchName" : $("#searchName").val()
       ,"searchGrade" : $("#searchGrade").val()
       ,"searchGenre" : $("#searchGenre").val()
-      ,"offset" : (page - 1) * 5 // 1 page => 0, 2 page => 5, 3 page = > 10
+      ,"curPage" : page
+      ,"rowsPerPage" : $("#rowsPerPage").val()
     };
 
     $.ajax({
-      url: `/api/search-list?searchName=${searchData.searchName}&searchGrade=${searchData.searchGrade}&searchGenre=${searchData.searchGenre}&offset=${searchData.offset}` // 요청 URL
+      url: `/api/search-list?searchName=${searchData.searchName}&searchGrade=${searchData.searchGrade}&searchGenre=${searchData.searchGenre}&curPage=${searchData.curPage}&rowsPerPage=${searchData.rowsPerPage}` // 요청 URL
       ,type: "GET"           // 전송 방식
     })
         .done(function(data, textStatus, jqXHR) {
-          that.printList(data.resultData);
+          that.printButtons(data.resultData.count);
+          that.printList(data.resultData.list);
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
           alert("실패", textStatus);
         });
+  }
+
+  printButtons(count) {
+
   }
 
   printGenre(genre) {
