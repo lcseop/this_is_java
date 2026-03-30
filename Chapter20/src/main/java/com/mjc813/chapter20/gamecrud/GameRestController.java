@@ -74,7 +74,7 @@ public class GameRestController {
             return ResponseEntity.ok().body(new CommonResponse(0, "ok", list));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CommonResponse(-999, "Server Error"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CommonResponse(-999, "Server Error", null));
         }
     }
 }

@@ -11,4 +11,5 @@ public class SearchDto {
     private String searchName;
     private String searchGrade;
     private String searchGenre;
+    private Integer offset;
 }

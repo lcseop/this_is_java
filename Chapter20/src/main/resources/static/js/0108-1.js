@@ -10,16 +10,17 @@ class NintendoGame {
     })
   }
 
-  searchList() {
+  searchList(page) {
     let that = this;
     let searchData = {
       "searchName" : $("#searchName").val()
       ,"searchGrade" : $("#searchGrade").val()
       ,"searchGenre" : $("#searchGenre").val()
+      ,"offset" : (page - 1) * 5 // 1 page => 0, 2 page => 5, 3 page = > 10
     };
 
     $.ajax({
-      url: `/api/search-list?searchName=${$("#searchName").val()}&searchGrade=${$("#searchGrade").val()}&searchGenre=${$("#searchGenre").val()}` // 요청 URL
+      url: `/api/search-list?searchName=${searchData.searchName}&searchGrade=${searchData.searchGrade}&searchGenre=${searchData.searchGenre}&offset=${searchData.offset}` // 요청 URL
       ,type: "GET"           // 전송 방식
     })
         .done(function(data, textStatus, jqXHR) {
@@ -158,7 +159,7 @@ class NintendoGame {
     if (this.checkGame("add")) {
       // this.#gameList.push(setGame);
       this.insertData(setGame);
-      this.searchList();
+      this.searchList(1);
       // this.clearInputData();
     }
   }
@@ -179,7 +180,7 @@ class NintendoGame {
     })
         .done(function(data, textStatus, jqXHR) {
           alert("성공", data);
-          that.searchList();
+          that.searchList(1);
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
           alert("실패", textStatus);
@@ -218,7 +219,7 @@ class NintendoGame {
         .done(function(data, textStatus, jqXHR) {
           alert("성공", data);
           that.clearInputData();
-          that.searchList();
+          that.searchList(1);
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
           alert("실패", textStatus);
@@ -248,7 +249,7 @@ class NintendoGame {
         .done(function(data, textStatus, jqXHR) {
           alert("성공", data);
           that.clearInputData();
-          that.searchList();
+          that.searchList(1);
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
           alert("실패", textStatus);
@@ -296,7 +297,7 @@ $(() => {
   // jquery 실행
   let nint = new NintendoGame();
   // nint.getList();
-  nint.searchList();
+  nint.searchList(1);
 
   $("#btnAdd").click(function (e) {
     nint.addGame();
@@ -319,10 +320,14 @@ $(() => {
   });
 
   $(document).on("click", "#btnSearch", function (e) {
-    nint.searchList();
+    nint.searchList(1);
   })
 
   $(document).on("click", "#btnFindId", function (e) {
     nint.findId();
+  })
+
+  $(document).on("click", ".btnPage", function (e) {
+    nint.searchList($(e.target).text());
   })
 });

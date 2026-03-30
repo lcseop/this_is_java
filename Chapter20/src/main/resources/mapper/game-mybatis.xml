@@ -54,5 +54,6 @@
                     AND genre =  #{searchGenre}
                 </if>
             ORDER BY id DESC
+            LIMIT 5 OFFSET #{offset}
     </select>
 </mapper>
