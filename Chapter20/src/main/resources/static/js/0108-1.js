@@ -25,16 +25,12 @@ class NintendoGame {
       ,type: "GET"           // 전송 방식
     })
         .done(function(data, textStatus, jqXHR) {
-          that.printButtons(data.resultData.count);
+          that.printButtons(data.resultData);
           that.printList(data.resultData.list);
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
           alert("실패", textStatus);
         });
-  }
-
-  printButtons(count) {
-
   }
 
   printGenre(genre) {
@@ -165,7 +161,6 @@ class NintendoGame {
     if (this.checkGame("add")) {
       // this.#gameList.push(setGame);
       this.insertData(setGame);
-      this.searchList(1);
       // this.clearInputData();
     }
   }
@@ -297,6 +292,49 @@ class NintendoGame {
 //    // this.setData2InputBox(찾은원소);
 //    this.setData2InputBox(findGame)
   }
+
+  printButtons(data) {
+    const curPage = data.curPage / data.rowsPerPage + 1;
+    const totStartPage = 1;
+    const totEndPage = Math.ceil(data.count / data.rowsPerPage);
+    const startPage = (curPage <= 10) ? totStartPage :
+        (curPage % 10 !== 0) ? (Math.floor(curPage / 10)) * 10 + 1 : curPage - 9;
+    const endPage = (curPage <= 10) ?
+                            (totEndPage <= 10 ? totEndPage : 10) :
+                            (startPage + 9 <= totEndPage ? startPage + 9 : totEndPage);
+
+    $("#pageSection").empty();
+    $("#pageSection").append(this.getPrevButton(curPage));
+    if (startPage === totStartPage) {
+      $("#btnPrev").prop("disabled", true);
+    }
+    console.log(curPage, startPage, endPage);
+    for (let i = startPage; i <= endPage; i++) {
+      $("#pageSection").append(this.getNumberButton(i, curPage));
+    }
+    $("#pageSection").append(this.getNextButton(curPage, totEndPage));
+    if (endPage === totEndPage) {
+      $("#btnNext").prop("disabled", true);
+    }
+  }
+
+  getPrevButton(page) {
+    let newPage = (page - 10 <= 1) ? 1 : page - 10;
+    return `<button id="btnPrev" data-new=${newPage}>◀</button>`;
+  }
+
+  getNumberButton(page, curPage) {
+    if (page === curPage) {
+      return `<button class="btnPage" style="border: 3px solid darkblue; font-weight: bold">${page}</button>`;
+    } else {
+      return `<button class="btnPage">${page}</button>`;
+    }
+  }
+
+  getNextButton(page, totEndPage) {
+    let newPage = (page + 10 <= totEndPage ? page + 10 : totEndPage);
+    return `<button id="btnNext" data-new=${newPage}>▶</button>`;
+  }
 }
 
 $(() => {
@@ -335,5 +373,15 @@ $(() => {
 
   $(document).on("click", ".btnPage", function (e) {
     nint.searchList($(e.target).text());
+  })
+
+  $(document).on("click", "#btnPrev", function (e) {
+    let newPage = $(e.target).data("new");
+    nint.searchList(newPage);
+  })
+
+  $(document).on("click", "#btnNext", function (e) {
+    let newPage = $(e.target).data("new");
+    nint.searchList(newPage);
   })
 });
