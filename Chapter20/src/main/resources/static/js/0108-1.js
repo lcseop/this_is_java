@@ -325,7 +325,7 @@ class NintendoGame {
 
   getNumberButton(page, curPage) {
     if (page === curPage) {
-      return `<button class="btnPage" style="border: 3px solid darkblue; font-weight: bold">${page}</button>`;
+      return `<button class="btnPage" style="background-color: yellow; border: 3px solid black; font-weight: bold">${page}</button>`;
     } else {
       return `<button class="btnPage">${page}</button>`;
     }
