@@ -1,3 +1,31 @@
 spring:
   application:
-    name: PetApp
+    name: Chapter20
+  #  datasource:
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    url: jdbc:mysql://localhost:3307/reports?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+  #    username: report_user
+  #    password: report1234@
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/petshop_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: petshop_owner
+    password: petshop9876!
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  jpa:
+    hibernate:
+      ddl-auto: update # Entity 의 멤버변수가 변하면 자동으로 데이터베이스의 테이블도 갱신해준다.
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      dialect: org.hibernate.dialect.MySQL8InnoDBDialect
+
+server:
+  port: 8084
