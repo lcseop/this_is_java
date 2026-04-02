@@ -1,10 +1,16 @@
 package com.mjc813.petapp.pet.cntr;
 
+import com.mjc813.petapp.pet.PetRequestDto;
 import com.mjc813.petapp.pet.PetResponseDto;
 import com.mjc813.petapp.pet.dto.PetDto;
 import com.mjc813.petapp.pet.dto.PetEntity;
 import com.mjc813.petapp.pet.svc.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +62,24 @@ public class PetRestController {
         try {
             Integer nId = Integer.parseInt(id.toString());
             PetDto result = this.petService.findById(nId);
+            return ResponseEntity.ok().body(new PetResponseDto(0, "SUCCESS", result));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PetResponseDto(-997, "Not Found Error", null));
+        } catch (NumberFormatException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new PetResponseDto(-994, "Number Error", null));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new PetResponseDto(-999, "ERROR", null));
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<PetResponseDto> findByNameContainsOrderByIdDesc
+            (@RequestParam String searchName,
+             @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
+        try {
+            PetRequestDto prd = new PetRequestDto();
+            prd.setSearchName(searchName);
+            Page<PetEntity> result = this.petService.findByNameContainsOrderByIdDesc(prd, pageable);
             return ResponseEntity.ok().body(new PetResponseDto(0, "SUCCESS", result));
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PetResponseDto(-997, "Not Found Error", null));

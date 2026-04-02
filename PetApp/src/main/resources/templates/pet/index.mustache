@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>PET SHOP</title>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+	<h1> A 팀의 펫 관리 입니다. </h1>
+    <section>
+        <fieldset>
+            <label for="id">ID</label><input id="id" type="text">
+            <label for="name">이름</label><input id="name" type="text">
+            <label for="species">종류</label><input id="species" type="text">
+            <label for="breed">품종</label><input id="breed" type="text">
+            <label for="gender">성별</label><input id="gender" type="text">
+            <label for="birth">생일</label><input id="birth" type="text">
+            <label for="imgFile">이미지</label><input id="imgFile" type="text">
+        </fieldset>
+        <div>
+            <button id="btnAdd">추가</button>
+            <button id="btnUpdate">수정</button>
+            <button id="btnDelete">삭제</button>
+        </div>
+    </section>
+    <section>
+        <fieldset>
+            <label for="searchName">검색이름</label><input id="searchName" type="text">
+            <button id="btnSearch">검색</button>
+        </fieldset>
+    </section>
+    <section id="list">
+    </section>
+    <div style="align-self: center">
+        <button id="more">더보기</button>
+    </div>
+</body>
+</html>
+<script>
+    let curPage = -1;
+    $(() => {
+        $.searchList = () => {
+            let searchName = $("#searchName").val();
+            curPage++;
+        $.ajax({
+            url: `/api/pet/search?searchName=${searchName}&sort=id,desc&size=5&page=${curPage}` // 요청 URL
+            ,type: "GET"           // 전송 방식
+        })
+                .done(function(data, textStatus, jqXHR) {
+                    $.printList(data.data.content);
+                    if (data.data.last) {
+                        $("#more").hide();
+                    } else {
+                        $("#more").show();
+                    }
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    alert("실패", textStatus);
+                });
+        }
+
+        $.printList = (list) => {
+            list.forEach((item) => {
+                $("#list").append($.makeHtmlOne(item));
+            })
+        }
+
+        $.makeHtmlOne = (one) => {
+            return `<div onclick=$.showPet(${one.id})>
+                        <span>${one.name}</span>
+                        <span>${one.species}</span>
+                        <span>${one.breed}</span>
+                        <span>${one.gender}</span>
+                        <span>${one.birth}</span>
+                        <span>${one.imgFile}</span>
+                    </div>`
+        }
+
+        $.showPet = (id) => {
+            $.ajax({
+                url: "/api/pet/" + id
+                , type: "GET"
+            }).done(function(data, textStatus, jqXHR) {
+                $.printItem(data.data);
+            }).fail(function(data, textStatus, errorThrown) {
+                alert("실패");
+            })
+        }
+
+        $.printItem = (item) => {
+            $("#id").val(item.id);
+            $("#name").val(item.name);
+            $("#breed").val(item.breed);
+            $("#gender").val(item.gender);
+            $("#species").val(item.species);
+            $("#birth").val(item.birth);
+            $("#imgFile").val(item.imgFile);
+        }
+
+        $.getItem = () => {
+            let item = {
+                "name" : $("#name").val()
+                , "breed" : $("#breed").val()
+                , "gender" : $("#gender").val()
+                , "species" : $("#species").val()
+                , "birth" : $("#birth").val()
+                , "imgFile" : $("#imgFile").val()
+            }
+            return item;
+        }
+
+        $.addPet = () => {
+            const petData = {
+                name: $("#name").val()
+                , species: $("#species").val()
+                , breed: $("#breed").val()
+                , gender: $("#gender").val()
+                , birth: $("#birth").val()
+                , imgFile: $("#imgFile").val()
+            };
+            $.ajax({
+                url: "/api/pet"
+                , type: "POST"
+                , dataType:"json"
+                , data: JSON.stringify(petData)
+                , contentType: "application/json"
+            }).done(function(data, textStatus, jqXHR) {
+                alert("입력 성공");
+                $.emptyItem();
+                $.resetList();
+            }).fail(function(data, textStatus, errorThrown) {
+                alert("입력 실패");
+            })
+        }
+
+        $.updatePet = () => {
+            const petData = {
+                id: $("#id").val()
+                , name: $("#name").val()
+                , species: $("#species").val()
+                , breed: $("#breed").val()
+                , gender: $("#gender").val()
+                , birth: $("#birth").val()
+                , imgFile: $("#imgFile").val()
+            };
+
+            if (petData.id === "") {
+                return;
+            }
+
+            $.ajax({
+                url: "/api/pet"
+                , type: "PATCH"
+                , dataType:"json"
+                , data: JSON.stringify(petData)
+                , contentType: "application/json"
+            }).done(function(data, textStatus, jqXHR) {
+                alert("데이터 수정 성공");
+                $.emptyItem();
+                $.resetList();
+            }).fail(function(data, textStatus, errorThrown) {
+                alert("데이터 수정 실패")
+            })
+        }
+
+        $.deletePet = () => {
+            if ($("#id").val() === "") {
+                return;
+            }
+
+            $.ajax({
+                url: "/api/pet?id=" + $("#id").val()
+                , type: "DELETE"
+            }).done(function(data, textStatus, jqXHR) {
+                alert("데이터 삭제 성공");
+                $.emptyItem();
+                $.resetList();
+            }).fail(function(data, textStatus, errorThrown) {
+                alert("데이터 삭제 실패");
+            })
+        }
+
+        $.emptyItem = () => {
+            $("#id").val("");
+            $("#name").val("");
+            $("#breed").val("");
+            $("#gender").val("");
+            $("#species").val("");
+            $("#birth").val("");
+            $("#imgFile").val("");
+        }
+
+        $.resetList = () => {
+            $("#list").empty();
+            $("#more").show();
+            curPage = -1;
+            $.searchList();
+        }
+
+        $(document).on("click", "#more", function (e) {
+            $.searchList();
+        })
+
+        $(document).on("click", "#btnSearch", function (e) {
+            $.resetList();
+        })
+
+        $(document).on("click", "#btnAdd", function (e) {
+            $.addPet();
+        })
+
+        $(document).on("click", "#btnUpdate", function (e) {
+            $.updatePet();
+        })
+
+        $(document).on("click", "#btnDelete", function (e) {
+            $.deletePet();
+        })
+
+        $.searchList();
+
+    });
+</script>
