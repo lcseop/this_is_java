@@ -50,8 +50,8 @@ public class PetService {
         return result;
     }
 
-    public Page<PetEntity> findByNameContainsOrderByIdDesc (PetRequestDto requestDto, Pageable pageable) {
-        Page<PetEntity> list = this.petRepository.findByNameContains(requestDto.getSearchName(), pageable);
+    public Page<PetEntity> findByNameContainsAndSpeciesContains(PetRequestDto requestDto, Pageable pageable) {
+        Page<PetEntity> list = this.petRepository.findByNameContainsAndSpeciesContains(requestDto.getSearchName(), requestDto.getSearchSpecies(), pageable);
         return list;
     }
 }

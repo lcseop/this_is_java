@@ -10,4 +10,5 @@ import lombok.*;
 public class PetRequestDto {
     private Integer rowCount;
     private String searchName;
+    private String searchSpecies;
 }

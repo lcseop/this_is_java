@@ -25,7 +25,8 @@
     </section>
     <section>
         <fieldset>
-            <label for="searchName">검색이름</label><input id="searchName" type="text">
+            <label for="searchName">이름</label><input id="searchName" type="text">
+            <label for="searchSpecies">종류</label><input id="searchSpecies" type="text">
             <button id="btnSearch">검색</button>
         </fieldset>
     </section>
@@ -41,9 +42,10 @@
     $(() => {
         $.searchList = () => {
             let searchName = $("#searchName").val();
+            let searchSpecies = $("#searchSpecies").val();
             curPage++;
         $.ajax({
-            url: `/api/pet/search?searchName=${searchName}&sort=id,desc&size=5&page=${curPage}` // 요청 URL
+            url: `/api/pet/search?searchName=${searchName}&searchSpecies=${searchSpecies}&sort=id,desc&size=5&page=${curPage}` // 요청 URL
             ,type: "GET"           // 전송 방식
         })
                 .done(function(data, textStatus, jqXHR) {
@@ -159,7 +161,11 @@
                 $.emptyItem();
                 $.resetList();
             }).fail(function(data, textStatus, errorThrown) {
-                alert("데이터 수정 실패")
+                if (data.responseJSON.code === -997) {
+                    alert("존재하지 않는 ID입니다.");
+                } else {
+                    alert("데이터 수정 실패");
+                }
             })
         }
 

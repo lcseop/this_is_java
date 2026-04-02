@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PetRepository extends JpaRepository<PetEntity, Integer> {
     // 더보기 제작 시 Slice 클래스 사용
-    Page<PetEntity> findByNameContains(String searchName, Pageable pageable);
+    Page<PetEntity> findByNameContainsAndSpeciesContains(String searchName, String searchSpecies, Pageable pageable);
 }
