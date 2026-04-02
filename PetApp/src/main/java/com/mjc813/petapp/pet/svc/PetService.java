@@ -13,13 +13,7 @@ public class PetService {
 
     public PetDto insert(PetDto petDto) {
         PetEntity petEntity = new PetEntity();
-        petEntity.setId(null);
-        petEntity.setName(petDto.getName());
-        petEntity.setBirth(petDto.getBirth());
-        petEntity.setBreed(petDto.getBreed());
-        petEntity.setGender(petDto.getGender());
-        petEntity.setImgFile(petDto.getImgFile());
-        petEntity.setSpecies(petDto.getSpecies());
+        petEntity.copyMemberValue(petDto);
 
         this.petRepository.save(petEntity);
 
@@ -28,27 +22,21 @@ public class PetService {
     }
 
     public PetDto update(PetDto petDto) {
-        PetEntity petEntity = new PetEntity();
-        petEntity.setId(petDto.getId());
-        petEntity.setName(petDto.getName());
-        petEntity.setBirth(petDto.getBirth());
-        petEntity.setBreed(petDto.getBreed());
-        petEntity.setGender(petDto.getGender());
-        petEntity.setImgFile(petDto.getImgFile());
-        petEntity.setSpecies(petDto.getSpecies());
+        PetEntity petEntity = this.petRepository.findById(petDto.getId()).orElseThrow();
+        petEntity.copyMemberValue(petDto);
 
         this.petRepository.save(petEntity);
 
         PetDto result = new PetDto();
+        result.copyMemberValue(petEntity);
+        return result;
+    }
 
-        result.setId(petEntity.getId());
-        result.setName(petEntity.getName());
-        result.setBirth(petEntity.getBirth());
-        result.setBreed(petEntity.getBreed());
-        result.setGender(petEntity.getGender());
-        result.setImgFile(petEntity.getImgFile());
-        result.setSpecies(petEntity.getSpecies());
-
+    public PetDto deleteById (int id) {
+        PetEntity petEntity = this.petRepository.findById(id).orElseThrow();
+        this.petRepository.deleteById(id);
+        PetDto result = new PetDto();
+        result.copyMemberValue(petEntity);
         return result;
     }
 }

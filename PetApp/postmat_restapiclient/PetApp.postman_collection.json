@@ -1,0 +1,40 @@
+{
+  "info": {
+    "_postman_id": "74b7b29b-fbb1-4234-8019-93c56beaf339",
+    "name": "PetApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53642322",
+    "_collection_link": "https://go.postman.co/collection/53642322-74b7b29b-fbb1-4234-8019-93c56beaf339?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Insert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\" : \"야옹이3\"\r\n    , \"species\" : \"고양이\"\r\n    , \"breed\" : \"페르시안\"\r\n    , \"gender\" : \"F\"\r\n    , \"birth\" : \"2025-06-01\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8084/api/pet",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8084",
+          "path": [
+            "api",
+            "pet"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PetDto {
+public class PetDto implements IPet {
     private Integer id;
     private String name;
     private String species;
