@@ -47,7 +47,22 @@ public class PetRestController {
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PetResponseDto(-997, "Not Found Error", null));
         } catch (Exception e) {
-            return ResponseEntity.ok().body(new PetResponseDto(-999, "ERROR", null));
+            return ResponseEntity.status(500).body(new PetResponseDto(-999, "ERROR", null));
+        }
+    }
+
+    @GetMapping("/{id}") // => /api/pet/id번호
+    public ResponseEntity<PetResponseDto> findById(@PathVariable Object id) {
+        try {
+            Integer nId = Integer.parseInt(id.toString());
+            PetDto result = this.petService.findById(nId);
+            return ResponseEntity.ok().body(new PetResponseDto(0, "SUCCESS", result));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PetResponseDto(-997, "Not Found Error", null));
+        } catch (NumberFormatException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new PetResponseDto(-994, "Number Error", null));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new PetResponseDto(-999, "ERROR", null));
         }
     }
 }

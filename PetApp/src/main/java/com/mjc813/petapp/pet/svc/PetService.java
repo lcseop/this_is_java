@@ -39,4 +39,11 @@ public class PetService {
         result.copyMemberValue(petEntity);
         return result;
     }
+
+    public PetDto findById (int id) {
+        PetEntity petEntity = this.petRepository.findById(id).orElseThrow();
+        PetDto result = new PetDto();
+        result.copyMemberValue(petEntity);
+        return result;
+    }
 }
