@@ -1,5 +1,6 @@
 package com.mjc813.petapp.pet.cntr;
 
+import com.mjc813.petapp.common.MyExcepton;
 import com.mjc813.petapp.pet.PetRequestDto;
 import com.mjc813.petapp.pet.PetResponseDto;
 import com.mjc813.petapp.pet.dto.PetDto;
@@ -33,14 +34,12 @@ public class PetRestController {
     }
 
     @PatchMapping
-    public ResponseEntity<PetResponseDto> updatePet(@RequestBody PetDto petDto) {
+    public ResponseEntity<PetResponseDto> updatePet(@RequestBody PetDto petDto) throws MyExcepton {
         try {
             PetDto result = this.petService.update(petDto);
             return ResponseEntity.ok().body(new PetResponseDto(0, "SUCCESS", result));
         } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PetResponseDto(-997, "Not Found Error", null));
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body(new PetResponseDto(-999, "ERROR", null));
+            throw new MyExcepton(petDto);
         }
     }
 
