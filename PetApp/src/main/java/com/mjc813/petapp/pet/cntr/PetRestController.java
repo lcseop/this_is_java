@@ -73,8 +73,8 @@ public class PetRestController {
 
     @GetMapping("/search")
     public ResponseEntity<PetResponseDto> findByNameContains
-            (@RequestParam String searchName,
-             @RequestParam String searchSpecies,
+            (@RequestParam(name="searchName", defaultValue = "") String searchName,
+             @RequestParam(name="searchSpecies", defaultValue = "") String searchSpecies,
              @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
         try {
             PetRequestDto prd = new PetRequestDto();

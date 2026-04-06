@@ -9,7 +9,7 @@
 	<h1> A 팀의 펫 관리 입니다. </h1>
     <section>
         <fieldset>
-            <label for="id">ID</label><input id="id" type="text">
+            <label for="id">ID</label><input id="id" type="text" disabled>
             <label for="name">이름</label><input id="name" type="text">
             <label for="species">종류</label><input id="species" type="text">
             <label for="breed">품종</label><input id="breed" type="text">
@@ -107,19 +107,12 @@
                 , "species" : $("#species").val()
                 , "birth" : $("#birth").val()
                 , "imgFile" : $("#imgFile").val()
-            }
+            };
             return item;
         }
 
         $.addPet = () => {
-            const petData = {
-                name: $("#name").val()
-                , species: $("#species").val()
-                , breed: $("#breed").val()
-                , gender: $("#gender").val()
-                , birth: $("#birth").val()
-                , imgFile: $("#imgFile").val()
-            };
+            const petData = $.getItem();
             $.ajax({
                 url: "/api/pet"
                 , type: "POST"
