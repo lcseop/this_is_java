@@ -13,7 +13,7 @@ public class CategoryRestController {
     @Autowired
     private CategoryService service;
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity<ApiResponse<CategoryDto>> insert (@RequestBody CategoryDto categoryDto) {
         CategoryDto result = this.service.insert(categoryDto);
         ApiResponse<CategoryDto> apiResponse = ApiResponse.<CategoryDto>builder()
