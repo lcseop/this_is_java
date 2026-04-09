@@ -24,8 +24,7 @@ public class CategoryService {
         CategoryEntity rs = this.repository.save(newData);
 
         CategoryDto result = new CategoryDto();
-        result.setId(rs.getId());
-        result.setName(dto.getName());
+        result.copyMembers(rs, true);
         return result;
     }
 
@@ -49,7 +48,7 @@ public class CategoryService {
 
     public CategoryDto findById(Integer id) {
         CategoryEntity categoryEntity = this.repository.findById(id).orElseThrow();
-        CategoryDto result = CategoryDto.builder().id(categoryEntity.getId()).name(categoryEntity.getName()).build();
+        CategoryDto result = (CategoryDto) CategoryDto.builder().build().copyMembers(categoryEntity, true);
         return result;
     }
 
@@ -57,7 +56,7 @@ public class CategoryService {
         Slice<CategoryEntity> slice = this.repository.findByNameContains(crd.getSearchName(), pageable);
         List<CategoryEntity> list = slice.getContent();
         List<CategoryDto> resultList = list.stream().
-                map(categoryEntity -> CategoryDto.builder().id(categoryEntity.getId()).name(categoryEntity.getName()).build())
+                map(categoryEntity -> (CategoryDto) CategoryDto.builder().build().copyMembers(categoryEntity, true))
                 .toList();
         Slice<CategoryDto> result = new SliceImpl<>(resultList, pageable, slice.hasNext());
         return result;
