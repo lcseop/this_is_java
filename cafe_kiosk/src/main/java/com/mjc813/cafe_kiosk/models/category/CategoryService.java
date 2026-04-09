@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryService {
@@ -38,7 +41,7 @@ public class CategoryService {
 
     public CategoryDto delete(Integer id) {
         CategoryEntity categoryEntity = this.repository.findById(id).orElseThrow();
-        this.repository.delete(categoryEntity);
+        this.repository.deleteById(id);
 
         CategoryDto result = CategoryDto.builder().id(categoryEntity.getId()).name(categoryEntity.getName()).build();
         return result;
@@ -50,9 +53,14 @@ public class CategoryService {
         return result;
     }
 
-    public Page<CategoryEntity> findByNameContains(CategoryResultDto crd, Pageable pageable) {
-        Page<CategoryEntity> list = this.repository.findByNameContains(crd.getSearchName(), pageable);
-        return list;
+    public Slice<CategoryDto> findByNameContains(CategoryResultDto crd, Pageable pageable) {
+        Slice<CategoryEntity> slice = this.repository.findByNameContains(crd.getSearchName(), pageable);
+        List<CategoryEntity> list = slice.getContent();
+        List<CategoryDto> resultList = list.stream().
+                map(categoryEntity -> CategoryDto.builder().id(categoryEntity.getId()).name(categoryEntity.getName()).build())
+                .toList();
+        Slice<CategoryDto> result = new SliceImpl<>(resultList, pageable, slice.hasNext());
+        return result;
     }
 
 }

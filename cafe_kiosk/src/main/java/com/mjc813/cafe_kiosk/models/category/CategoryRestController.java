@@ -4,6 +4,7 @@ import com.mjc813.cafe_kiosk.common.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -44,9 +45,9 @@ public class CategoryRestController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<ApiResponse<Page<CategoryEntity>>> search (@RequestParam(name="searchName", defaultValue="") String name, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<ApiResponse<Slice<CategoryDto>>> findSearch(@RequestParam(name="searchName", defaultValue="") String name, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
         CategoryResultDto crd = CategoryResultDto.builder().searchName(name).build();
-        Page<CategoryEntity> result = this.service.findByNameContains(crd, pageable);
+        Slice<CategoryDto> result = this.service.findByNameContains(crd, pageable);
         return ResponseEntity.status(200).body(ApiResponse.make(select_success, "SUCCESS", result));
     }
 }
