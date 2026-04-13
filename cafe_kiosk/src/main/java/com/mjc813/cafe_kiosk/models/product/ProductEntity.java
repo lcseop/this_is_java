@@ -12,6 +12,9 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity(name="product")
+@NamedEntityGraph(name = "ProductEntity.fetchCategory", attributeNodes = {
+        @NamedAttributeNode("category")
+})
 public class ProductEntity implements IProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
