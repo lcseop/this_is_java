@@ -52,6 +52,3 @@ store_name	varchar(500)not null							저장된파일명
 path		varchar(100)not null							폴더,구분명
 cookie_id	bigint		not null	foreign key (cookie.id)	과자 외래키
 ```
-
-- 목록1
-- 목록
