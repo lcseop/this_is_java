@@ -31,9 +31,9 @@ public class CookieService {
 	}
 
 	public CookieDto findById(Long id) {
-		CookieEntity find = this.cookieRepository.findById(id).orElseThrow();
-		CookieDto result = (CookieDto)new CookieDto().copyMembers(find, true);
-		return result;
+		CookieEntity find = this.cookieRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Cookie not found: " + id));
+		return (CookieDto)new CookieDto().copyMembers(find, true);
 	}
 
 	public CookieDto deleteById(Long id) {

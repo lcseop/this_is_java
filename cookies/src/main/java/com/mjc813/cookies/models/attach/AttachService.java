@@ -30,9 +30,9 @@ public class AttachService {
 	}
 
 	public AttachDto findById(Long id) {
-		AttachEntity findEntity = this.attachRepository.findById(id).orElseThrow();
-		AttachDto result = (AttachDto)new AttachDto().copyMembers(findEntity, true);
-		return result;
+		AttachEntity findEntity = this.attachRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Attach not found: " + id));
+		return (AttachDto) new AttachDto().copyMembers(findEntity, true);
 	}
 
 	public AttachDto deleteById(Long id) {
