@@ -18,7 +18,7 @@ public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
 	@EntityGraph(attributePaths = {"cookie", "ingredient", "ingredient.category"})
 	Slice<RecipeEntity> findAllByCookieEquals(CookieEntity cookie, Pageable pageable);
 
-	@EntityGraph(value = "RecipeEntity.fetchCookieIngredient")
+	@EntityGraph(attributePaths = {"cookie", "ingredient", "ingredient.category"})
 	Slice<RecipeEntity> findByIngredient(IngredientEntity ingredient, Pageable pageable);
 	/*
 SELECT

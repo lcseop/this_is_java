@@ -40,7 +40,7 @@ public class CookieFileService {
      */
     @Transactional(rollbackFor = {IOException.class}) // 메소드에서 RuntimeException이 발생하면 롤백 처리함, 그냥 Exception은 롤백 안함
     public List<AttachDto> insert(CookieDto cookieDto, List<MultipartFile> files) throws IOException {
-        if (cookieDto == null || files == null || files.size() <= 0) {
+        if (cookieDto == null || files == null || files.isEmpty()) {
             return null;
         }
         if (this.cookieService.findById(cookieDto.getId()) == null) {
