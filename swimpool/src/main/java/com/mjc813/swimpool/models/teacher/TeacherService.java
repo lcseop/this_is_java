@@ -1,8 +1,10 @@
 package com.mjc813.swimpool.models.teacher;
 
+import com.mjc813.swimpool.models.swimpool.SwimPoolEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,10 +47,19 @@ public class TeacherService {
 
     public List<TeacherDto> findByName(String name, Pageable pageable) {
         Slice<TeacherEntity> find = teacherRepository.findByNameContains(name, pageable);
-        List<TeacherDto> result = find.stream().map(s -> {
-            TeacherDto findDto = (TeacherDto) new TeacherDto().copyMembers(s, true);
-            return findDto;
-        }).toList();
+        List<TeacherDto> result = find
+                .stream()
+                .map(s -> (TeacherDto) new TeacherDto().copyMembers(s, true))
+                .toList();
+        return result;
+    }
+
+    public Slice<TeacherDto> findBySwimpool(Integer swimpoolId, Pageable pageable) {
+        SwimPoolEntity swimpool = SwimPoolEntity.builder().id(swimpoolId).build();
+        Slice<TeacherEntity> find = this.teacherRepository.findBySwimPoolEquals(swimpool, pageable);
+        List<TeacherDto> list = find.getContent().stream().map(
+                item -> (TeacherDto) new TeacherDto().copyMembers(item, true)).toList();
+        Slice<TeacherDto> result = new SliceImpl<>(list, find.getPageable(), find.hasNext());
         return result;
     }
 }

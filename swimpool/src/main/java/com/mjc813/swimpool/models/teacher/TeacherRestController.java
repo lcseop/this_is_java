@@ -4,6 +4,7 @@ import com.mjc813.swimpool.models.common.ApiResponse;
 import com.mjc813.swimpool.models.common.ResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,15 @@ public class TeacherRestController {
     private ResponseEntity<ApiResponse<List<TeacherDto>>> findByName(@RequestParam String name,
                                                                      @PageableDefault(size=10, page=0, direction= Sort.Direction.DESC) Pageable pageable) {
         List<TeacherDto> result = this.teacherService.findByName(name, pageable);
+        return ResponseEntity.status(200).body(ApiResponse.make(
+                ResponseCode.select_ok, "ok", result
+        ));
+    }
+
+    @GetMapping("/swimpool/{id}")
+    private ResponseEntity<ApiResponse<Slice<TeacherDto>>> findBySwimPool(@PathVariable(name="id") Integer swimpoolId,
+                                                                          @PageableDefault(size=10, page=0, direction= Sort.Direction.DESC) Pageable pageable) {
+        Slice<TeacherDto> result = this.teacherService.findBySwimpool(swimpoolId, pageable);
         return ResponseEntity.status(200).body(ApiResponse.make(
                 ResponseCode.select_ok, "ok", result
         ));
