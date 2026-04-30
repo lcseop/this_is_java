@@ -23,7 +23,7 @@ public class TeacherEntity implements TeacherInterface {
     @Column(length=20, nullable=false)
     private String main;
 
-    @Column(name="birth_year", nullable=false)
+    @Column(name="birth_year", nullable=true)
     private Integer birthYear;
 
     @Transient
