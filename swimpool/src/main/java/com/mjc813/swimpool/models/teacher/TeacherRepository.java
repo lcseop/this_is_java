@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<TeacherEntity, Integer> {
+    @EntityGraph(attributePaths = {"swimPool"})
     Slice<TeacherEntity> findByNameContains(String name, Pageable pageable);
 
     @EntityGraph(attributePaths = {"swimPool"})

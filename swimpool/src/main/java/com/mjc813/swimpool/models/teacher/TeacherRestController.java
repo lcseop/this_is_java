@@ -52,7 +52,7 @@ public class TeacherRestController {
 
     @GetMapping("/searchname")
     private ResponseEntity<ApiResponse<List<TeacherDto>>> findByName(@RequestParam String name,
-                                                                     @PageableDefault(size=10, page=0, direction= Sort.Direction.DESC) Pageable pageable) {
+                                                                     @PageableDefault(size=10, page=0, direction= Sort.Direction.ASC) Pageable pageable) {
         List<TeacherDto> result = this.teacherService.findByName(name, pageable);
         return ResponseEntity.status(200).body(ApiResponse.make(
                 ResponseCode.select_ok, "ok", result
