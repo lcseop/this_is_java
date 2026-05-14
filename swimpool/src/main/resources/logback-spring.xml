@@ -54,14 +54,10 @@
 		<appender-ref ref="ErrorRollingFile" />
 	</root>
 
-	<!--	&lt;!&ndash; JPA SQL 출력 &ndash;&gt;-->
-	<!--	<logger name="org.hibernate.SQL" level="${JPA_LEVEL}" additive="false" />-->
-
-	<!--	&lt;!&ndash; 파라미터 값 출력 &ndash;&gt;-->
-	<!--	<logger name="org.hibernate.orm.jdbc.bind" level="TRACE" additive="false" />-->
-
-	<!--	<logger name="jdbc.sqlonly" level="${JPA_LEVEL}" additive="false" />-->
-	<!--	<logger name="jdbc.resultsettable" level="${JPA_LEVEL}" additive="false" />-->
-
 	<logger name="p6spy" level="TRACE"/>
+
+	<logger name="jdbc.sqltiming" level="${JPA_LEVEL}" additive="false" />
+
+	<logger name="jdbc.resultsettable" level="${JPA_LEVEL}" additive="false" />
+
 </configuration>

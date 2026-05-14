@@ -5,8 +5,13 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
   jpa:
+    defer-datasource-initialization: true # JPA Hibernate가 테이블을 만든 후 data.sql이 실행되도록 지연
     hibernate:
       ddl-auto: none # Entity 의 멤버변수가 변하면 자동으로 데이터베이스의 테이블도 갱신해준다.
+  sql:
+    init:
+      mode: always
+#      separator: ^^^ END OF SCRIPT ^^^
 
 server:
   port: ${PORT}
