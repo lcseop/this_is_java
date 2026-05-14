@@ -62,3 +62,6 @@ build/
 docker/mariadb/db
 docker/mysql8/mysql-data
 docker/postgresql/pgdata
+
+.env.*
+.env
