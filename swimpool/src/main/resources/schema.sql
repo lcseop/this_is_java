@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS swimpool (
   addr2 varchar(200) DEFAULT NULL,
   lanes varchar(200) DEFAULT NULL,
   name varchar(20) NOT NULL,
-  size varchar(50) DEFAULT NULL,
+  size integer DEFAULT 0,
   tel varchar(30) DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
