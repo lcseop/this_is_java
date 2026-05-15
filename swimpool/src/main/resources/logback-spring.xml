@@ -54,8 +54,6 @@
 		<appender-ref ref="ErrorRollingFile" />
 	</root>
 
-	<logger name="p6spy" level="TRACE"/>
-
 	<logger name="jdbc.sqltiming" level="${JPA_LEVEL}" additive="false" />
 
 	<logger name="jdbc.resultsettable" level="${JPA_LEVEL}" additive="false" />
