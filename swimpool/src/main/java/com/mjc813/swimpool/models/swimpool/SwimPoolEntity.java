@@ -18,18 +18,18 @@ public class SwimPoolEntity implements SwimPoolInterface {
     @Column(length=50, nullable=false)
     private String name;
 
-    @Column(length=15, nullable=false)
+    @Column(length=15, nullable=true)
     private String tel;
 
-    @Column(length=100, nullable=false)
+    @Column(length=100, nullable=true)
     private String addr1;
 
-    @Column(length=100, nullable=false)
+    @Column(length=100, nullable=true)
     private String addr2;
 
-    @Column(length=100, nullable=false)
+    @Column(length=100, nullable=true)
     private String lanes;
 
-    @Column(nullable=false)
+    @Column(nullable=true)
     private Integer size;
 }
