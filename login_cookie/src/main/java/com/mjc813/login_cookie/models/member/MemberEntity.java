@@ -17,7 +17,7 @@ public class MemberEntity implements IMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "sing_id", length = 20, nullable = false,  unique = true)
+    @Column(name = "sign_id", length = 20, nullable = false,  unique = true)
     private String signId;
 
     @Column(length = 200, nullable = false)
@@ -25,6 +25,12 @@ public class MemberEntity implements IMember {
 
     @Column(length = 200, nullable = false, unique = true)
     private String email;
+
+    @Column(length = 10, nullable = false)
+    private String role;
+
+    @Column(name = "valid_text")
+    private String validText;
 
     @Column(name = "is_valid_email", nullable = false)
     private Boolean isValidEmail;

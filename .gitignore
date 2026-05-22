@@ -65,3 +65,5 @@ docker/postgresql/pgdata
 
 .env.*
 .env
+
+**/mysql-data/

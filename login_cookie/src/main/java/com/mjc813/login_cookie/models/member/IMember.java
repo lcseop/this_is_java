@@ -15,6 +15,12 @@ public interface IMember {
     String getEmail();
     void setEmail(String email);
 
+    String getRole();
+    void setRole(String role);
+
+    String getValidText();
+    void setValidText(String validText);
+
     Boolean getIsValidEmail();
     void setIsValidEmail(Boolean isValidEmail);
 
@@ -42,6 +48,12 @@ public interface IMember {
         }
         if (forced || src.getEmail() == null) {
             src.setEmail(this.getEmail());
+        }
+        if (forced || src.getRole() == null) {
+            src.setRole(this.getRole());
+        }
+        if  (forced || src.getValidText() == null) {
+            src.setValidText(this.getValidText());
         }
         if (forced || src.getIsValidEmail() == null) {
             src.setIsValidEmail(this.getIsValidEmail());
