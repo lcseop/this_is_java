@@ -3,70 +3,70 @@ package com.mjc813.login_cookie.models.member;
 import java.time.LocalDateTime;
 
 public interface IMember {
-    Long getId();
-    void setId(Long id);
+	Long getId();
+	void setId(Long id);
 
-    String getSignId();
-    void setSignId(String signId);
+	String getSignId();
+	void setSignId(String signId);
 
-    String getPassword();
-    void setPassword(String password);
+	String getPassword();
+	void setPassword(String password);
 
-    String getEmail();
-    void setEmail(String email);
+	String getEmail();
+	void setEmail(String email);
 
-    String getRole();
-    void setRole(String role);
+	String getRole();
+	void setRole(String role);
 
-    String getValidText();
-    void setValidText(String validText);
+	Boolean getIsValidEmail();
+	void setIsValidEmail(Boolean isValidEmail);
 
-    Boolean getIsValidEmail();
-    void setIsValidEmail(Boolean isValidEmail);
+	String getValidText();
+	void setValidText(String validText);
 
-    LocalDateTime getCreateDt();
-    void setCreateDt(LocalDateTime createDt);
+	LocalDateTime getCreateDt();
+	void setCreateDt(LocalDateTime createDt);
 
-    LocalDateTime getUpdateDt();
-    void setUpdateDt(LocalDateTime updateDt);
+	LocalDateTime getUpdateDt();
+	void setUpdateDt(LocalDateTime updateDt);
 
-    LocalDateTime getDeleteDt();
-    void setDeleteDt(LocalDateTime deleteDt);
+	LocalDateTime getDeleteDt();
+	void setDeleteDt(LocalDateTime deleteDt);
 
-    default IMember clone(IMember src, boolean forced) {
-        if (src == null) {
-            return this;
-        }
-        if (forced || src.getId() == null) {
-            src.setId(this.getId());
-        }
-        if (forced || src.getSignId() == null) {
-            src.setSignId(this.getSignId());
-        }
-        if (forced || src.getPassword() == null) {
-            src.setPassword(this.getPassword());
-        }
-        if (forced || src.getEmail() == null) {
-            src.setEmail(this.getEmail());
-        }
-        if (forced || src.getRole() == null) {
-            src.setRole(this.getRole());
-        }
-        if  (forced || src.getValidText() == null) {
-            src.setValidText(this.getValidText());
-        }
-        if (forced || src.getIsValidEmail() == null) {
-            src.setIsValidEmail(this.getIsValidEmail());
-        }
-        if (forced || src.getCreateDt() == null) {
-            src.setCreateDt(this.getCreateDt());
-        }
-        if (forced || src.getUpdateDt() == null) {
-            src.setUpdateDt(this.getUpdateDt());
-        }
-        if (forced || src.getDeleteDt() == null) {
-            src.setDeleteDt(this.getDeleteDt());
-        }
-        return src;
-    }
+	default IMember clone(IMember source, boolean bForced) {
+		if ( source == null ) {
+			return this;
+		}
+		if ( bForced || source.getId() != null ) {
+			this.setId(source.getId());
+		}
+		if ( bForced || source.getSignId() != null ) {
+			this.setSignId(source.getSignId());
+		}
+		if ( bForced || source.getPassword() != null ) {
+			this.setPassword(source.getPassword());
+		}
+		if ( bForced || source.getEmail() != null ) {
+			this.setEmail(source.getEmail());
+		}
+		if ( bForced || source.getRole() != null ) {
+			this.setRole(source.getRole());
+		}
+		if ( bForced || source.getIsValidEmail() != null ) {
+			this.setIsValidEmail(source.getIsValidEmail());
+		}
+		if ( bForced || source.getValidText() != null ) {
+			this.setValidText(source.getValidText());
+		}
+		if ( bForced || source.getCreateDt() != null ) {
+			this.setCreateDt(source.getCreateDt());
+		}
+		if ( bForced || source.getUpdateDt() != null ) {
+			this.setUpdateDt(source.getUpdateDt());
+		}
+		if ( bForced || source.getDeleteDt() != null ) {
+			this.setDeleteDt(source.getDeleteDt());
+		}
+		return this;
+	}
 }

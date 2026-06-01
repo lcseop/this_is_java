@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MemberController {
-
-    @GetMapping("/member")
-    public String getHomePage() {
-        return "member/index";
-    }
+	@GetMapping("/member")
+	public String getHomePage() {
+		return "member/index";
+	}
 }

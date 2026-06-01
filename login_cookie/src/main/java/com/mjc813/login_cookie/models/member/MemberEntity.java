@@ -8,39 +8,39 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity(name = "member")
 public class MemberEntity implements IMember {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "sign_id", length = 20, nullable = false,  unique = true)
-    private String signId;
+	@Column(name = "sign_id", nullable = false, length = 20, unique = true)
+	private String signId;
 
-    @Column(length = 200, nullable = false)
-    private String password;
+	@Column(nullable = false, length = 200)
+	private String password;
 
-    @Column(length = 200, nullable = false, unique = true)
-    private String email;
+	@Column(nullable = false, length = 200, unique = true)
+	private String email;
 
-    @Column(length = 10, nullable = false)
-    private String role;
+	@Column(nullable = false, length = 10)
+	private String role;
 
-    @Column(name = "valid_text")
-    private String validText;
+	@Column(name = "is_valid_email", nullable = false)
+	private Boolean isValidEmail;
 
-    @Column(name = "is_valid_email", nullable = false)
-    private Boolean isValidEmail;
+	@Column(name = "valid_text", length=100)
+	private String validText;
 
-    @Column(name = "create_dt", nullable = false)
-    private LocalDateTime createDt;
+	@Column(name = "create_dt", nullable = false)
+	private LocalDateTime createDt;
 
-    @Column(name = "update_dt")
-    private LocalDateTime updateDt;
+	@Column(name = "update_dt")
+	private LocalDateTime updateDt;
 
-    @Column(name = "delete_dt")
-    private LocalDateTime deleteDt;
+	@Column(name = "delete_dt")
+	private LocalDateTime deleteDt;
 }

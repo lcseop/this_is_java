@@ -13,30 +13,24 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class SignInDto implements IMember {
-    @JsonIgnore
-    private Long id;
+	@JsonIgnore
+	private Long id;
 
-    private String signId;
-    private String password;
+	private String signId;
+	private String password;
 
-    @JsonIgnore
-    private String email;
-
-    @JsonIgnore
-    private String role;
-
-    @JsonIgnore
-    private String validText;
-
-    @JsonIgnore
-    private Boolean isValidEmail;
-
-    @JsonIgnore
-    private LocalDateTime createDt;
-
-    @JsonIgnore
-    private LocalDateTime updateDt;
-
-    @JsonIgnore
-    private LocalDateTime deleteDt;
+	@JsonIgnore
+	private String email;
+	@JsonIgnore
+	private String role;
+	@JsonIgnore
+	private Boolean isValidEmail;
+	@JsonIgnore
+	private String validText;
+	@JsonIgnore
+	private LocalDateTime createDt;
+	@JsonIgnore
+	private LocalDateTime updateDt;
+	@JsonIgnore
+	private LocalDateTime deleteDt;
 }
