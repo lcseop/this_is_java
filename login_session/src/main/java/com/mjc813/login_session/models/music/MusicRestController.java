@@ -18,7 +18,7 @@ public class MusicRestController {
 	@Autowired
 	private MusicService musicService;
 
-	@PostMapping("")
+	@PostMapping()
 	public ResponseEntity<ComResponseDto<MusicDto>> insert(Model model, @RequestBody MusicDto insertDto) throws LoginException {
 //		IMember signedMember = (IMember)model.getAttribute("signedMember");
 		// Model 클래스에 "signedMember" 키에 해당하는 MemberDto 가 존재하는지 찾는다.
@@ -36,10 +36,10 @@ public class MusicRestController {
 		);
 	}
 
-	@PatchMapping("")
+	@PatchMapping()
 	public ResponseEntity<ComResponseDto<MusicDto>> update(Model model, @RequestBody MusicDto insertDto) {
 		IMember signedMember = this.IsAdmin(model);
-		if ( signedMember == null || !musicService.getCreateId(insertDto.getId()).equals(getIMember(model).getSignId()) ) {
+		if ( signedMember == null && !musicService.getCreateId(insertDto.getId()).equals(getIMember(model).getSignId()) ) {
 			return ResponseEntity.status(500).body(
 					ComResponseDto.make(ResponseCode.AUTHORIZATION_ERROR, null)
 			);
@@ -54,7 +54,7 @@ public class MusicRestController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ComResponseDto<MusicDto>> delete(Model model, @PathVariable Long id) {
 		IMember signedMember = this.IsAdmin(model);
-		if ( signedMember == null || !musicService.getCreateId(id).equals(getIMember(model).getSignId()) ) {
+		if ( signedMember == null && !musicService.getCreateId(id).equals(getIMember(model).getSignId()) ) {
 			return ResponseEntity.status(500).body(
 					ComResponseDto.make(ResponseCode.AUTHORIZATION_ERROR, null)
 			);

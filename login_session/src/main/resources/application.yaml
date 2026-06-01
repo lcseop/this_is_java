@@ -16,8 +16,6 @@ spring:
       hibernate:
         format_sql: true
       dialect: org.hibernate.dialect.MySQL8InnoDBDialect
-  mvc:
-    throw-exception-if-no-handler-found: true # @ExceptionHandler 에서 예외처리를 찾아라
 #  web:
 #    resources:
 #      add-mappings: false # 404.html 출력 하지 마라
@@ -38,13 +36,12 @@ spring:
           auth: true
           STARTTLS:
             enable: true
-
-server:
-  port: 8282
   servlet:
     encoding:
       charset: UTF-8
-      enabled: true
       force: true
+
+server:
+  port: 8282
 
 kind: Application

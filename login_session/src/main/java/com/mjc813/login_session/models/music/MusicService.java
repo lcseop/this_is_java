@@ -28,8 +28,10 @@ public class MusicService {
 	}
 
 	public MusicDto update(IMember member, MusicDto insertDto) {
-		MusicEntity musicEntity = (MusicEntity)new MusicEntity().copyMembers(insertDto, false);
+		MusicEntity musicEntity = musicJpaRepository.findById(insertDto.getId()).orElseThrow();
+		MusicEntity update = (MusicEntity)new MusicEntity().copyMembers(insertDto, true);
 
+		MusicEntity result = (MusicEntity) musicEntity.copyMembers(update, false);
 		musicEntity.setUpdateId(member.getSignId());
 		musicEntity.setUpdateDt(LocalDateTime.now());
 		MusicEntity saved = this.musicJpaRepository.save(musicEntity);
@@ -39,6 +41,7 @@ public class MusicService {
 
 	public MusicDto delete(IMember member, Long id) {
 		MusicEntity musicEntity = musicJpaRepository.findById(id).orElseThrow();
+
 		musicEntity.setDeleteDt(LocalDateTime.now());
 		musicEntity.setDeleteId(member.getSignId());
 		MusicEntity saved = this.musicJpaRepository.save(musicEntity);
@@ -47,20 +50,12 @@ public class MusicService {
 	}
 
 	public MusicDto findById(Long id) throws Mjc813Exception {
-		Optional<MusicEntity> musicEntity = this.musicJpaRepository.findById(id);
-		if (musicEntity.isPresent()) {
-			MusicDto find = (MusicDto)new MusicDto().copyMembers(musicEntity.get(), true);
-			return find;
-		} else {
+		MusicEntity musicEntity = this.musicJpaRepository.findById(id).orElseThrow();
+		MusicDto find = (MusicDto)new MusicDto().copyMembers(musicEntity, true);
+		if (find == null || find.getDeleteId() != null) {
 			throw new Mjc813Exception(ResponseCode.DATA_NOT_FOUND_ERROR, "data is not exists");
 		}
-
-//		MusicEntity musicEntity = this.musicJpaRepository.findById(id).orElseThrow();
-//		MusicDto find = (MusicDto)new MusicDto().copyMembers(musicEntity, true);
-//		if (find == null || find.getDeleteId() != null) {
-//			throw new Mjc813Exception(ResponseCode.DATA_NOT_FOUND_ERROR, "data is not exists");
-//		}
-//		return find;
+		return find;
 	}
 
 	public List<MusicDto> findAll() {
