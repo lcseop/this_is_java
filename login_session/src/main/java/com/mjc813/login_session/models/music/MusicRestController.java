@@ -30,7 +30,7 @@ public class MusicRestController {
 			);
 		}
 
-		MusicDto result = this.musicService.insert(getIMember(model), insertDto);
+		MusicDto result = this.musicService.insert(model, insertDto);
 		return ResponseEntity.status(201).body(
 			ComResponseDto.make(ResponseCode.SUCCESS, result)
 		);
@@ -38,14 +38,14 @@ public class MusicRestController {
 
 	@PatchMapping()
 	public ResponseEntity<ComResponseDto<MusicDto>> update(Model model, @RequestBody MusicDto insertDto) {
-		IMember signedMember = this.IsAdmin(model);
-		if ( signedMember == null && !musicService.getCreateId(insertDto.getId()).equals(getIMember(model).getSignId()) ) {
+		IMember signedMember = this.IsMineOrAdmin(model, insertDto.getId());
+		if ( signedMember == null ) {
 			return ResponseEntity.status(500).body(
 					ComResponseDto.make(ResponseCode.AUTHORIZATION_ERROR, null)
 			);
 		}
 
-		MusicDto result = this.musicService.update(getIMember(model), insertDto);
+		MusicDto result = this.musicService.update(model, insertDto);
 		return ResponseEntity.status(200).body(
 				ComResponseDto.make(ResponseCode.SUCCESS, result)
 		);
@@ -53,14 +53,14 @@ public class MusicRestController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ComResponseDto<MusicDto>> delete(Model model, @PathVariable Long id) {
-		IMember signedMember = this.IsAdmin(model);
-		if ( signedMember == null && !musicService.getCreateId(id).equals(getIMember(model).getSignId()) ) {
+		IMember signedMember = this.IsMineOrAdmin(model, id);
+		if ( signedMember == null ) {
 			return ResponseEntity.status(500).body(
 					ComResponseDto.make(ResponseCode.AUTHORIZATION_ERROR, null)
 			);
 		}
 
-		MusicDto result = this.musicService.delete(getIMember(model), id);
+		MusicDto result = this.musicService.delete(model, id);
 		return ResponseEntity.status(200).body(
 				ComResponseDto.make(ResponseCode.SUCCESS, result)
 		);
@@ -126,7 +126,17 @@ public class MusicRestController {
 		return signedMember;
 	}
 
-	private IMember getIMember(Model model) {
-        return (IMember)model.getAttribute("signedMember");
+	private IMember IsMineOrAdmin(Model model, Long id) {
+		IMember signedMember = (IMember)model.getAttribute("signedMember");
+		if ( signedMember != null) {
+			if (signedMember.getRole().equals("USER")) {
+				if (musicService.getCreateId(id).equals(signedMember.getSignId())) {
+					return signedMember;
+				}
+			} else if (signedMember.getRole().equals("ADMIN")) {
+				return signedMember;
+			}
+		}
+		return null;
 	}
 }

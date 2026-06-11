@@ -1,11 +1,13 @@
 package com.mjc813.login_session.models.music;
 
 import com.mjc813.login_session.common.AuthorizedException;
+import com.mjc813.login_session.common.LoginException;
 import com.mjc813.login_session.common.Mjc813Exception;
 import com.mjc813.login_session.common.ResponseCode;
 import com.mjc813.login_session.models.member.IMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +18,9 @@ public class MusicService {
 	@Autowired
 	private MusicJpaRepository musicJpaRepository;
 
-	public MusicDto insert(IMember member, MusicDto insertDto) {
+	public MusicDto insert(Model model, MusicDto insertDto) {
 		MusicEntity musicEntity = (MusicEntity)new MusicEntity().copyMembers(insertDto, true);
+		IMember member = (IMember) model.getAttribute("signedMember");
 
 		musicEntity.setCreateId(member.getSignId());
 		musicEntity.setCreateDt(LocalDateTime.now());
@@ -27,9 +30,10 @@ public class MusicService {
 		return musicDto;
 	}
 
-	public MusicDto update(IMember member, MusicDto insertDto) {
-		MusicEntity musicEntity = musicJpaRepository.findById(insertDto.getId()).orElseThrow();
-		MusicEntity update = (MusicEntity)new MusicEntity().copyMembers(insertDto, true);
+	public MusicDto update(Model model, MusicDto updateDto) {
+		MusicEntity musicEntity = musicJpaRepository.findByIdAndDeleteIdIsNull(updateDto.getId()).orElseThrow();
+		MusicEntity update = (MusicEntity)new MusicEntity().copyMembers(updateDto, true);
+		IMember member = (IMember) model.getAttribute("signedMember");
 
 		MusicEntity result = (MusicEntity) musicEntity.copyMembers(update, false);
 		musicEntity.setUpdateId(member.getSignId());
@@ -39,8 +43,9 @@ public class MusicService {
 		return musicDto;
 	}
 
-	public MusicDto delete(IMember member, Long id) {
-		MusicEntity musicEntity = musicJpaRepository.findById(id).orElseThrow();
+	public MusicDto delete(Model model, Long id) {
+		MusicEntity musicEntity = musicJpaRepository.findByIdAndDeleteIdIsNull(id).orElseThrow();
+		IMember member = (IMember) model.getAttribute("signedMember");
 
 		musicEntity.setDeleteDt(LocalDateTime.now());
 		musicEntity.setDeleteId(member.getSignId());
@@ -59,7 +64,7 @@ public class MusicService {
 	}
 
 	public List<MusicDto> findAll() {
-		List<MusicEntity> musicEntities = this.musicJpaRepository.findAll();
+		List<MusicEntity> musicEntities = this.musicJpaRepository.findAllByDeleteIdIsNull();
 		List<MusicDto> result = this.transfer(musicEntities);
 		return result;
 	}
