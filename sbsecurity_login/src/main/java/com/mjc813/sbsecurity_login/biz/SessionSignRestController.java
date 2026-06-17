@@ -5,7 +5,6 @@ import com.mjc813.sbsecurity_login.common.LoginException;
 import com.mjc813.sbsecurity_login.common.ResponseCode;
 import com.mjc813.sbsecurity_login.model.auth.SignInDto;
 import com.mjc813.sbsecurity_login.model.auth.SignUpDto;
-import com.mjc813.sbsecurity_login.model.auth.ValidEmailDto;
 import com.mjc813.sbsecurity_login.model.member.IMember;
 import com.mjc813.sbsecurity_login.model.member.MemberDto;
 import com.mjc813.sbsecurity_login.model.member.MemberService;
@@ -39,43 +38,6 @@ public class SessionSignRestController {
 		return ResponseEntity.status(200).body(
 				ComResponseDto.make(ResponseCode.SUCCESS, find)
 		);
-	}
-
-	@GetMapping("/checkvalidemail")
-	public ResponseEntity<ComResponseDto<Boolean>> checkvalidemailGet(
-			@RequestParam("signId") String signId,
-			@RequestParam("validText") String validText) {
-		Boolean isValid = this.checkValid(signId, validText);
-		if ( isValid ) {
-			return ResponseEntity.status(200).body(
-					ComResponseDto.make(ResponseCode.SUCCESS, isValid)
-			);
-		} else {
-			return ResponseEntity.status(500).body(
-					ComResponseDto.make(ResponseCode.AUTHENTICATION_ERROR, isValid)
-			);
-		}
-	}
-
-	@PostMapping("/checkvalidemail")
-	public ResponseEntity<ComResponseDto<Boolean>> checkvalidemailPost(
-			@RequestBody ValidEmailDto validEmailDto) {
-		Boolean isValid = this.authService.checkValidEmail(validEmailDto);
-		if ( isValid ) {
-			return ResponseEntity.status(200).body(
-					ComResponseDto.make(ResponseCode.SUCCESS, isValid)
-			);
-		} else {
-			return ResponseEntity.status(500).body(
-					ComResponseDto.make(ResponseCode.AUTHENTICATION_ERROR, isValid)
-			);
-		}
-	}
-
-	private Boolean checkValid(String signId, String validText) {
-		ValidEmailDto validEmailDto = ValidEmailDto.builder().signId(signId).validText(validText).build();
-		Boolean isValid = this.authService.checkValidEmail(validEmailDto);
-		return isValid;
 	}
 
 	@PostMapping("/signin")

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MemberJpaRepository extends JpaRepository<MemberEntity, Long> {
+public interface MemberJpaRepository extends JpaRepository<MemberEntity, Long>  {
 	Optional<MemberEntity> findBySignId(String signId);
 }

@@ -2,7 +2,6 @@ package com.mjc813.sbsecurity_login.biz;
 
 import com.mjc813.sbsecurity_login.common.LoginException;
 import com.mjc813.sbsecurity_login.model.auth.SignInDto;
-import com.mjc813.sbsecurity_login.model.auth.ValidEmailDto;
 import com.mjc813.sbsecurity_login.model.member.MemberEntity;
 import com.mjc813.sbsecurity_login.model.member.MemberJpaRepository;
 import com.mjc813.sbsecurity_login.model.member.Role;
@@ -13,18 +12,6 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 	@Autowired
 	private MemberJpaRepository memberJpaRepository;
-
-	public Boolean checkValidEmail(ValidEmailDto validEmailDto) {
-		MemberEntity find = this.memberJpaRepository.findBySignId(validEmailDto.getSignId()).orElseThrow();
-		if ( validEmailDto.getValidText().equals(find.getValidText()) ) {
-			find.setIsValidEmail(true);
-			find.setRole(Role.USER.toString());
-			this.memberJpaRepository.save(find);
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	public Boolean signMember(SignInDto signInDto) throws LoginException {
 		MemberEntity find = this.memberJpaRepository.findBySignId(signInDto.getSignId()).orElseThrow();

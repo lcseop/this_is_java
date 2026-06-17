@@ -1,8 +1,15 @@
 package com.mjc813.sbsecurity_login.model.member;
 
-import java.time.LocalDateTime;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public interface IMember {
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public interface IMember extends UserDetails {
 	Long getId();
 	void setId(Long id);
 
@@ -32,6 +39,18 @@ public interface IMember {
 
 	LocalDateTime getDeleteDt();
 	void setDeleteDt(LocalDateTime deleteDt);
+
+	@Override
+	default Collection<? extends GrantedAuthority> getAuthorities() {
+		List<SimpleGrantedAuthority> list = new ArrayList<>();
+		list.add(new SimpleGrantedAuthority(this.getRole()));
+		return list;
+	}
+
+	@Override
+	default String getUsername() {
+		return this.getSignId();
+	}
 
 	default IMember clone(IMember source, boolean bForced) {
 		if ( source == null ) {
