@@ -1,7 +1,7 @@
-package com.mjc813.sbsecurity_login.model.member;
+package com.mjc813.jwtsecurity_login.models.member;
 
-import com.mjc813.sbsecurity_login.common.Util;
-import com.mjc813.sbsecurity_login.model.member.Role;
+import com.mjc813.jwtsecurity_login.common.Util;
+import com.mjc813.jwtsecurity_login.models.role.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

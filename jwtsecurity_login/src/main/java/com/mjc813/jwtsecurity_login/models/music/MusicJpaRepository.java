@@ -1,4 +1,4 @@
-package com.mjc813.sbsecurity_login.model.music;
+package com.mjc813.jwtsecurity_login.models.music;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -8,8 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface MusicJpaRepository extends JpaRepository<MusicEntity, Long> {
-    Optional<MusicEntity> findAllByDeleteIdIsNull(Long id);
-    List<MusicEntity> findAllByDeleteIdIsNull();
-
-    Optional<MusicEntity> findByIdAndDeleteIdIsNull(Long id);
+	Optional<MusicEntity> findByIdAndDeleteIdIsNull(long id);   // 이 방법은 관리자도 조회 못한다.
+	List<MusicEntity> findAllByDeleteIdIsNull();
 }

@@ -1,4 +1,4 @@
-package com.mjc813.sbsecurity_login.common;
+package com.mjc813.jwtsecurity_login.common;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

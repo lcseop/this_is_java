@@ -1,10 +1,10 @@
-package com.mjc813.sbsecurity_login.biz;
+package com.mjc813.jwtsecurity_login.biz;
 
-import com.mjc813.sbsecurity_login.common.LoginException;
-import com.mjc813.sbsecurity_login.model.auth.SignInDto;
-import com.mjc813.sbsecurity_login.model.member.MemberEntity;
-import com.mjc813.sbsecurity_login.model.member.MemberJpaRepository;
-import com.mjc813.sbsecurity_login.model.member.Role;
+import com.mjc813.jwtsecurity_login.common.LoginException;
+import com.mjc813.jwtsecurity_login.models.auth.SignInDto;
+import com.mjc813.jwtsecurity_login.models.member.MemberEntity;
+import com.mjc813.jwtsecurity_login.models.member.MemberJpaRepository;
+import com.mjc813.jwtsecurity_login.models.role.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
 	@Autowired
 	private MemberJpaRepository memberJpaRepository;
 
