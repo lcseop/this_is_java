@@ -29,3 +29,8 @@ spring:
 
 server:
   port: 8083
+
+myapp:
+  jwt:
+    secret: thisismyjwtsecretkey!123456abcdef
+    expireAccessToken: 1800000
