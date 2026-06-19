@@ -38,9 +38,18 @@ public class MemberService implements UserDetailsService {
 		return result;
 	}
 
-	public MemberDto findById(String id) {
-		MemberEntity findById = this.memberJpaRepository.findById(Long.parseLong(id)).orElseThrow();
+	public MemberDto findById(Long id) {
+		MemberEntity findById = this.memberJpaRepository.findById(id).orElseThrow();
 		MemberDto result = (MemberDto)new MemberDto().clone(findById, true);
+		return result;
+	}
+
+	public MemberDto deleteById(Long id) {
+		MemberEntity find = this.memberJpaRepository.findById(id).orElseThrow();
+		MemberEntity memberEntity = (MemberEntity)new MemberEntity().clone(find, true);
+		memberEntity.setDeleteDt(LocalDateTime.now());
+		MemberEntity saved = this.memberJpaRepository.save(memberEntity);
+		MemberDto result = (MemberDto)new MemberDto().clone(saved, true);
 		return result;
 	}
 
