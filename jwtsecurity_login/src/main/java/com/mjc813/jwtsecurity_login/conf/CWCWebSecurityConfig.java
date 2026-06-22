@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -76,6 +77,8 @@ public class CWCWebSecurityConfig {
 					.requestMatchers("/api/v1/auth/**").permitAll()
 					.anyRequest().authenticated()
 			)
+
+				.sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authenticationProvider(daoAuthenticationProvider())
 			.addFilterBefore(cwcAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
 		;
